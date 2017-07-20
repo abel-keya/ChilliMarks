@@ -23,10 +23,13 @@
 @section('body')
 	<div class="padded-full">
 		<a href="{{ url('school') }}">
-	        <button class="btn fit-parent primary" style="margin-top: 10px;">School settings</button>
+	        <button class="btn fit-parent primary" style="margin-top: 10px;">School Settings</button>
 	    </a>
 	    <a href="{{ url('classes-settings') }}">
-	        <button class="btn fit-parent primary" style="margin-top: 10px;">Classes settings</button>
+	        <button class="btn fit-parent primary" style="margin-top: 10px;">Classes Settings</button>
+	    </a>
+	    <a href="{{ url('groups-settings') }}">
+	        <button class="btn fit-parent primary" style="margin-top: 10px;">Groups Settings</button>
 	    </a>
 	    <a href="{{ url('about') }}">
 	        <button class="btn fit-parent primary" style="margin-top: 10px;">About ChilliApp</button>

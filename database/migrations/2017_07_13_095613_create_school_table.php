@@ -17,13 +17,13 @@ class CreateSchoolTable extends Migration
 
             $table->increments('id');
 
-            $table->string('name');
+            $table->string('name')->index();
 
-            $table->string('address');
+            $table->string('address')->index();
             
-            $table->string('phone');
+            $table->string('phone')->index();
             
-            $table->integer('from_user');
+            $table->integer('from_user')->unsigned()->index();
             
             $table->timestamps();
         });

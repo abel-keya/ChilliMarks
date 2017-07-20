@@ -27,7 +27,13 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    //Role_User Relationship
+    public function admission()
+    {
+        return $this->hasOne('chilliapp\Models\Admission');
+    }
+
+    /*  Role User Relationship
+    |--------------------------------------------------------------------------| */
     public function roles()
     {
         return $this->belongsToMany('chilliapp\Models\Role')->withTimestamps();
@@ -52,4 +58,61 @@ class User extends Authenticatable
     {
         return $this->roles()->detach($role);
     }
+
+    /*  Group User Relationship
+    |--------------------------------------------------------------------------| */
+
+    public function groups()
+    {
+        return $this->belongsToMany('chilliapp\Models\Group')->withTimestamps();
+    }
+
+
+    public function hasGroup($name)
+    {
+        foreach($this->groups as $group)
+        {
+            if($group->name == $name) return true;
+        }
+        return false;
+    }
+
+    public function assignGroup($group)
+    {
+        return $this->groups()->attach($group);
+    }
+
+    public function removeGroup($group)
+    {
+        return $this->groups()->detach($group);
+    }
+
+    /*  Stream User Relationship
+    |--------------------------------------------------------------------------| */
+
+    public function streams()
+    {
+        return $this->belongsToMany('chilliapp\Models\Stream')->withTimestamps();
+    }
+
+
+    public function hasStream($name)
+    {
+        foreach($this->streams as $stream)
+        {
+            if($stream->name == $name) return true;
+        }
+        return false;
+    }
+
+    public function assignStream($stream)
+    {
+        return $this->streams()->attach($stream);
+    }
+
+    public function removeStream($stream)
+    {
+        return $this->streams()->detach($stream);
+    }
+
 }

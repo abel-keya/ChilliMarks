@@ -31,12 +31,10 @@
 	</div>
 	<div class="padded-full">
 		<select name="year">
-			<option disabled selected>Select a Year</option>
-		    <option value='2017'>2017</option>
-		    <option value='2018'>2018</option>
-		    <option value='2019'>2019</option>
-		    <option value='2020'>2020</option>
-		    <option value='2021'>2021</option>
+			<option disabled>Select a Year</option>
+			@for($i=0; $i<=80; $i++) 
+		   		<option value='{{1970 + $i}}' @if( (1970 + $i)== date('Y') ) selected @endif>{{1970 + $i}}</option>
+		   	@endfor
 		</select>
 	</div>
 	<div class="padded-full">

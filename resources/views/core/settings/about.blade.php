@@ -26,7 +26,7 @@
 			<h5 style="padding-top: 25px;"><strong>Chilliapp Version: {{\Tremby\LaravelGitVersion\GitVersionHelper::getVersion() }}:</strong></h5>
 			<p>Copyright © {{ $year }}. Chilli App</p>
 			<p>Website: <a href="http://www.chilliapp.io" target="_blank">www.chilliapp.com</a></p>
-			<p>Chilliapp is released under the Chilliapp license which can be found <a href="{{ url('license') }}">here</a>.</p>
+			<p>ChilliApp is released under the ChilliApp license which can be found <a href="{{ url('license') }}">here</a>.</p>
 		</div>
 	</div>
 @endsection

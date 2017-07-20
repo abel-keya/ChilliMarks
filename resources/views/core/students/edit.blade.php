@@ -24,31 +24,48 @@
 <form method="POST" action="{{ url('update-student', $student->id) }}">
 	{{ csrf_field() }}
 	<div class="padded-full">
-	    <h5 class="pull-right">Admission No.</h5>
-	</div>
-	<div class="padded-full">
-		<input type="text" name="adm_no" value="{{ $student->adm_no }}" autocomplete="off" placeholder="Enter Student Adm. No." autofocus>
-	</div>
-	<div class="padded-full">
-	    <h5 class="pull-right">Name</h5>
+		<h5 class="pull-right">Name</h5>
 	</div>
 	<div class="padded-full">
 		<input type="text" name="name" value="{{ $student->name }}" autocomplete="off" placeholder="Enter Student Name">
 	</div>
 	<div class="padded-full">
-	    <h5 class="pull-right">Phone</h5>
+		<h5 class="pull-right">Phone</h5>
 	</div>
 	<div class="padded-full">
 		<input type="text" name="phone" value="{{ $student->phone }}" autocomplete="off" placeholder="Enter Phone No.">
 	</div>
 	<div class="padded-full">
-	    <h5 class="pull-right">Password</h5>
+		<h5 class="pull-right">Year</h5>
+	</div>
+	<div class="padded-full">
+		<select name="year">
+			<option disabled>Select a Year</option>
+			@for($i=0; $i<=80; $i++) 
+		   		<option value='{{1970 + $i}}' @if( (1970 + $i)== $student->year ) selected @endif>{{1970 + $i}}</option>
+		   	@endfor
+		</select>
+	</div>
+	<div class="padded-full">
+		<ul class="list">
+			<li class="">
+				<label class="checkbox">
+				<input type="checkbox" name="oldpassword" value="1" checked>
+					Check to use old password
+					<span></span>
+				</label>
+			</li>
+		</ul>
+	</div>
+	
+	<div class="padded-full">
+		<h5 class="pull-right">Password</h5>
 	</div>
 	<div class="padded-full">
 		<input type="password" name="password" autocomplete="off">
 	</div>
 	<div class="padded-full">
-	    <h5 class="pull-right">Re-type Password</h5>
+		<h5 class="pull-right">Re-type Password</h5>
 	</div>
 	<div class="padded-full">
 		<input type="password" name="password_confirm" autocomplete="off">

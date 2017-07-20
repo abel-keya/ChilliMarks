@@ -45,7 +45,9 @@
 	<ul class="list">
 		@foreach($exams as $exam)
 		<li>
-			<a class="padded-list" href="{{ url('view-exam', $exam->id)}}">{{ $exam->name }} {{ $exam->subject }} {{ $exam->teacher }}</a>
+			<a class="padded-list" href="{{ url('view-exam', $exam->id)}}">
+				<strong>{{ $exam->name }} Exam:</strong> {{ $exam->stream->name }}, {{ $exam->subject->name }}, {{ $exam->teacher->name }}
+			</a>
 		</li>
 		@endforeach
 	</ul>

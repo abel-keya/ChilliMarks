@@ -17,19 +17,21 @@ class CreateExamsTable extends Migration
             
             $table->increments('id');
             
-            $table->string('name');
+            $table->string('name')->index();
             
-            $table->integer('subject_id');
+            $table->integer('subject_id')->index();
             
-            $table->integer('teacher_id');
+            $table->integer('teacher_id')->index();
             
-            $table->integer('class_id');
+            $table->integer('stream_id')->index();
             
-            $table->string('period');
+            $table->string('period')->index();
             
-            $table->string('year');
+            $table->string('year')->index();
             
-            $table->integer('from_user');
+            $table->integer('status')->unsigned()->index();
+            
+            $table->integer('from_user')->unsigned()->index();
             
             $table->timestamps();
         });

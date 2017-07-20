@@ -21,7 +21,7 @@
 @endsection
 
 @section('body')
-<form method="POST" action="{{ url('update-class') }}">
+<form method="POST" action="{{ url('update-class', $class->id) }}">
 	{{ csrf_field() }}
 	<div class="padded-full">
 	    <h5 class="pull-right">Class Name</h5>

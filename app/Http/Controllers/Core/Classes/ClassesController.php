@@ -5,10 +5,18 @@ namespace chilliapp\Http\Controllers\Core\Classes;
 use Illuminate\Http\Request;
 use chilliapp\Http\Controllers\Controller;
 use chilliapp\Models\Classes;
+use chilliapp\Models\Stream;
 use Auth;
 
 class ClassesController extends Controller
-{
+{   
+    /*  Only authenticated users can access all functions.
+    |--------------------------------------------------------------------------| */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
     	$page = 'Classes';
@@ -58,10 +66,19 @@ class ClassesController extends Controller
 
     	$class = Classes::whereId($id)->first();
 
-    	return view('core.classes.view', compact('page', 'class'));
+        $streams = Stream::whereClassId($class->id)->get();
+
+    	return view('core.classes.view', compact('page', 'class', 'streams'));
     }
 
-    public function create(Request $request)
+    public function create()
+    {
+        $page = 'Create Class';
+
+        return view('core.classes.create', compact('page'));
+    }
+
+    public function postcreate(Request $request)
     {
     	$this->validate($request, [
           'name'              => 'required|min:1',
@@ -80,7 +97,7 @@ class ClassesController extends Controller
 
     	$message = 'Class created successfully.';
 
-    	return redirect()->route('classes')->with('success', $message);
+    	return redirect('classes')->with('success', $message);
     }
 
     public function edit($id)
@@ -127,11 +144,13 @@ class ClassesController extends Controller
     {
     	$class = Classes::whereId($id)->first();
 
-    	$class->delete();
+        $class->delete();
+        
+        $streams = Stream::whereId($id)->delete();
 
     	$message = 'Class deleted successfully.';
 
-    	return redirect()->route('classes')->with('success', $message);
+    	return redirect('classes')->with('success', $message);
     }
 
 }

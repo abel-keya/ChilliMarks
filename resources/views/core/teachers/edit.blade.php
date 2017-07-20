@@ -21,7 +21,7 @@
 @endsection
 
 @section('body')
-<form method="POST" action="{{ url('update-teacher') }}">
+<form method="POST" action="{{ url('update-teacher', $teacher->id) }}">
 	{{ csrf_field() }}
 	<div class="padded-full">
 	    <h5 class="pull-right">Name</h5>
@@ -40,13 +40,22 @@
 	</div>
 	<div class="padded-full">
 		<select name="year">
-			<option disabled selected>Select a Year</option> 
-		   	<option value='2017'>2017</option>
-		   	<option value='2018'>2018</option>
-		   	<option value='2019'>2019</option>
-		   	<option value='2020'>2020</option>
-		   	<option value='2021'>2021</option>
+			<option disabled>Select a Year</option>
+			@for ($y = 0; $y < count($years); $y++)
+				<option value='{{ $years[$y] }}' @if($teacher_year==$years[$y]) selected @endif>{{$years[$y]}}</option>
+			@endfor
 		</select>
+	</div>
+	<div class="padded-full">
+		<ul class="list">
+			<li class="">
+				<label class="checkbox">
+				<input type="checkbox" name="oldpassword" value="1" checked>
+					Check to use old password
+					<span></span>
+				</label>
+			</li>
+		</ul>
 	</div>
 	<div class="padded-full">
 	    <h5 class="pull-right">Password</h5>

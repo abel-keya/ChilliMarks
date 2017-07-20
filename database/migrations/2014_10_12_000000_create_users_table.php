@@ -17,15 +17,15 @@ class CreateUsersTable extends Migration
             
             $table->increments('id');
             
-            $table->string('name');
+            $table->string('name')->index();
             
-            $table->string('year');
+            $table->string('year')->index();
 
-            $table->string('phone');
+            $table->string('phone')->index();
 
             $table->string('password');
 
-            $table->integer('from_user');
+            $table->integer('from_user')->unsigned()->index();
             
             $table->rememberToken();
             

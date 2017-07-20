@@ -5,9 +5,22 @@ namespace chilliapp\Http\Controllers\Core\Exams;
 use Illuminate\Http\Request;
 use chilliapp\Http\Controllers\Controller;
 use chilliapp\Models\Exam;
+use chilliapp\Models\Subject;
+use chilliapp\Models\User;
+use chilliapp\Models\Classes;
+use chilliapp\Models\Stream;
+use chilliapp\Models\Grade;
+use Auth;
 
 class ExamsController extends Controller
-{
+{ 
+    /*  Only authenticated users can access all functions.
+    |--------------------------------------------------------------------------| */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index()
     {
     	$page = 'Exams';
@@ -30,7 +43,9 @@ class ExamsController extends Controller
 
 
         $exams = Exam::where('name', 'LIKE', '%' . $query . '%')
-            ->orwhere('subject', 'LIKE', '%' . $query . '%')
+            ->orWhereHas('subject', function ($term) use($query) {
+                $term->where('name','LIKE', '%' . $query . '%');
+            })
             ->orWhereHas('teacher', function ($term) use($query) {
                 $term->where('name','LIKE', '%' . $query . '%');
             })
@@ -68,38 +83,85 @@ class ExamsController extends Controller
     	return view('core.exams.view', compact('page', 'exam'));
     }
 
-    public function create(Request $request)
+    public function create()
+    {
+      $page = 'Create Exam';
+
+      $subjects = Subject::get();
+
+      $teachers = User::whereHas(
+            'roles', function($q){
+                $q->where('name', 'teacher');
+            }
+        )->get();
+
+
+      $streams  = Stream::get();
+
+      return view('core.exams.create', compact('page', 'subjects', 'teachers', 'streams'));
+    }
+
+    public function postcreate(Request $request)
     {
     	$this->validate($request, [
           'name'                 => 'required|min:1',
-          'subject'              => 'required',
+          'subject_id'           => 'required',
           'teacher_id'           => 'required',
-          'class_id'             => 'required',
+          'stream_id'            => 'required',
           'period'               => 'required',
           'year'                 => 'required'
           ]);
 
     	$name                     = $request->input('name');
-    	$subject                  = $request->input('subject');
+    	$subject_id               = $request->input('subject_id');
     	$teacher_id               = $request->input('teacher_id');
-    	$class_id                 = $request->input('class_id');
+    	$stream_id                = $request->input('stream_id');
       $period                   = $request->input('period');
       $year                     = $request->input('year');
       $from_user                = Auth::user()->id;
 
-      $exam                     = Exam::create([
+
+      $students          = User::WhereHas(
+                            'streams', function($q) use ($stream_id){
+                                $q->where('stream_id', $stream_id);
+                            }
+                        )->get();
+
+      if($students->count()>0)
+      {
+        $exam                     = Exam::create([
           'name'                => $name,
-          'subject'             => $subject,
+          'subject_id'          => $subject_id,
           'teacher_id'          => $teacher_id,
-          'class_id'            => $class_id,
+          'stream_id'           => $stream_id,
           'period'              => $period,
           'year'                => $year,
+          'status'              => 0,
           'from_user'           => $from_user
+        ]);
+
+        foreach($students as $student)
+        {
+          $grade = Grade::create([
+              'exam_id'             => $exam->id,
+              'student_id'          => $student->id,
+              'grade'               => 0,
+              'status'              => 0,
+              'from_user'           => $from_user
           ]);
+        }
 
-        $message = 'Exam created successfully.';
+        $message = 'Exam & Grades created successfully!';
 
-        return redirect()->route('exams')->with('success', $message);
+        return redirect('exams')->with('success', $message);
+
+      } else {
+
+        $message = 'Sorry, Exams & Grades were not created since there are no students in that class!';
+
+        return redirect('exams')->with('success', $message);
+      }
+
     }
 
     public function edit($id)
@@ -108,39 +170,49 @@ class ExamsController extends Controller
 
     	$exam = Exam::whereId($id)->first();
 
-    	return view('core.exams.edit', compact('page', 'exam'));
+      $subjects = Subject::get();
+
+      $teachers = User::whereHas(
+            'roles', function($q){
+                $q->where('name', 'teacher');
+            }
+        )->get();
+
+      $streams  = Stream::get();
+
+    	return view('core.exams.edit', compact('page', 'exam', 'subjects', 'teachers', 'streams'));
     }
 
     public function update(Request $request, $id)
     {
     	$this->validate($request, [
-          'name'                 => 'required|min:1',
-          'subject'              => 'required',
-          'teacher_id'           => 'required',
-          'class_id'             => 'required',
-          ]);
+        'name'                 => 'required|min:1',
+        'subject_id'           => 'required',
+        'teacher_id'           => 'required',
+        'stream_id'            => 'required',
+        ]);
 
     	$name                     = $request->input('name');
-    	$subject                  = $request->input('subject');
+    	$subject_id               = $request->input('subject_id');
     	$teacher_id               = $request->input('teacher_id');
-    	$class_id                 = $request->input('class_id');
-        $period                   = $request->input('period');
-        $year                     = $request->input('year');
-        $from_user                = Auth::user()->id;
+    	$stream_id                = $request->input('stream_id');
+      $period                   = $request->input('period');
+      $year                     = $request->input('year');
+      $from_user                = Auth::user()->id;
 
-        $exam                     = Exam::whereId($id)->update([
-          'name'                => $name,
-          'subject'             => $subject,
-          'teacher_id'          => $teacher_id,
-          'class_id'            => $class_id,
-          'period'              => $period,
-          'year'                => $year,
-          'from_user'           => $from_user
-          ]);
+      $exam                     = Exam::whereId($id)->update([
+        'name'                => $name,
+        'subject_id'          => $subject_id,
+        'teacher_id'          => $teacher_id,
+        'stream_id'           => $stream_id,
+        'period'              => $period,
+        'year'                => $year,
+        'from_user'           => $from_user
+        ]);
 
-        $message = 'Exam updated successfully.';
+      $message = 'Exam updated successfully.';
 
-        return redirect()->route('view-exam', [$id])->with('success', $message);
+      return redirect()->route('view-exam', [$id])->with('success', $message);
     }
 
     public function confirm($id)
@@ -160,6 +232,6 @@ class ExamsController extends Controller
 
     	$message = 'Exam deleted successfully.';
 
-    	return redirect()->route('exams')->with('success', $message);
+    	return redirect('exams')->with('success', $message);
     }
 }

@@ -17,10 +17,10 @@ class CreateSubjectsTable extends Migration
 
             $table->increments('id');
 
-            $table->string('name');
+            $table->string('name')->index();
 
-            $table->integer('from_user');
-
+            $table->integer('from_user')->unsigned()->index();
+            
             $table->timestamps();
         });
     }

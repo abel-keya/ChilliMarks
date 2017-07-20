@@ -31,7 +31,7 @@
 		</div>
 	</form>
 	<div class="padded-full">
-		<a href="">
+		<a href="{{ url('create-teacher')}}">
 			<button class="btn fit-parent primary" style="margin-top: 10px;">Add New Teacher</button>
 		</a>	
 	</div>

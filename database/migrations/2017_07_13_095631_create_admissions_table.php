@@ -17,9 +17,11 @@ class CreateAdmissionsTable extends Migration
 
             $table->increments('id');
 
-            $table->string('adm_no');
+            $table->integer('user_id')->unsigned()->index();
 
-            $table->integer('from_user');
+            $table->string('adm_no')->index();
+
+            $table->integer('from_user')->unsigned()->index();
             
             $table->timestamps();
         });

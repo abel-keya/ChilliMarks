@@ -21,29 +21,6 @@
 @endsection
 
 @section('body')
-	@extends('core.layout.index')
-
-@section('partials')
-
-	@if (Session::has('info'))
-		@include('core.partials.info')
-	@endif
-
-	@if (Session::has('success'))
-		@include('core.partials.success')
-	@endif
-
-	@if (Session::has('error'))
-		@include('core.partials.error')
-	@endif
-
-	@if (Session::has('errors'))
-		@include('core.partials.errors')
-	@endif
-
-@endsection
-
-@section('body')
 	<div class="padded-full text-justify">
 		<h5 style="padding-top: 25px;" class="text-center"><strong>Chilliapp - Terms and conditions</strong></h5>
 		<p>
@@ -136,13 +113,11 @@
 			Governing Law, Jurisdiction: Licensee hereby agrees not to initiate class-action lawsuits against Licensor in relation to this license and to compensate Licensor for any legal fees, cost or attorney fees should any claim brought by Licensee against Licensor be denied, in part or in full.
 		</p>
 	</div>
-@endsection
-
-@section('partials-script')
-	@if(Session::has('errors') || Session::has('error') || Session::has('info') || Session::has('success'))
-		@include('core.partials.notify-script')
-	@endif
-@endsection
+	<div class="padded-full">
+	    <a href="{{ url('about') }}">
+	        <button class="btn fit-parent primary">Go Back</button>
+	    </a>
+	</div>
 @endsection
 
 @section('partials-script')

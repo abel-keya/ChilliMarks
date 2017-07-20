@@ -28,10 +28,10 @@
 	</div>
 	<div class="padded-full">
 		<select name="name">
-			<option disabled selected>Select an Exam</option>
-		    <option value='1'>Opening Term</option>
-		   	<option value='2'>Mid Term</option>
-		   	<option value='3'>End Term</option>
+			<option disabled>Select an Exam</option>
+		    <option value='Opening Term' @if($exam->name=='Opening Term') selected @endif>Opening Term</option>
+		   	<option value='Mid Term' @if($exam->name=='Mid Term') selected @endif>Mid Term</option>
+		   	<option value='End Term' @if($exam->name=='End Term') selected @endif>End Term</option>
 		</select>
 	</div>
 	<div class="padded-full">
@@ -39,9 +39,12 @@
 	</div>
 	<div class="padded-full">
 		<select name="subject_id">
-			<option disabled selected>Select a Subject</option>
+			<option disabled>Select a Subject</option>
 			@foreach($subjects as $subject)
-		    	<option value='{{ $subject->id }}'>{{$subject->name}}</option>
+		    	<option value='{{ $subject->id }}' 
+		    		@if($subject->id==$exam->subject->id) selected @endif>
+		    		{{$subject->name}}
+		    	</option>
 		    @endforeach
 		</select>
 	</div>
@@ -50,9 +53,12 @@
 	</div>
 	<div class="padded-full">
 		<select name="teacher_id">
-			<option disabled selected>Select a Teacher</option>
+			<option disabled>Select a Teacher</option>
 		    @foreach($teachers as $teacher)
-		    	<option value='{{ $teacher->id}}'>{{ $teacher->name }}</option>
+		    	<option value='{{ $teacher->id }}' 
+		    		@if($teacher->id==$exam->teacher->id) selected @endif>
+		    		{{$teacher->name}}
+		    	</option>
 		    @endforeach
 		</select>
 	</div>
@@ -60,10 +66,14 @@
 		<h5 class="pull-right">Class</h5>
 	</div>
 	<div class="padded-full">
-		<select name="class_id">
-			<option disabled selected>Select a Class</option>
-		    @foreach($classes as $class)
-		    	<option value='{{$class->id}}'>{{ $class->name }}</option>
+		<select name="stream_id">
+			<option disabled>Select a Stream</option>
+		    @foreach($streams as $stream)
+		    	<option value='{{ $stream->id }}'>{{ $stream->name }}</option>
+		    	<option value='{{ $stream->id }}' 
+		    		@if($stream->id==$exam->stream->id) selected @endif>
+		    		{{$stream->name}}
+		    	</option>
 		    @endforeach
 		</select>
 	</div>
@@ -72,10 +82,10 @@
 	</div>
 	<div class="padded-full">
 		<select name="period">
-			<option disabled selected>Select a Term</option>
-		    <option value='1'>Term 1</option>
-		   	<option value='2'>Term 2</option>
-		   	<option value='3'>Term 3</option>
+			<option disabled>Select a Term</option>
+		    <option value='Term 1' @if($exam->term=='Term 1') selected @endif>Term 1</option>
+		   	<option value='Term 2' @if($exam->term=='Term 2') selected @endif>Term 2</option>
+		   	<option value='Term 3' @if($exam->term=='Term 3') selected @endif>Term 3</option>
 		</select>
 	</div>
 	<div class="padded-full">
@@ -83,12 +93,10 @@
 	</div>
 	<div class="padded-full">
 		<select name="year">
-			<option disabled selected>Select a Year</option> 
-		   	<option value='2017'>2017</option>
-		   	<option value='2018'>2018</option>
-		   	<option value='2019'>2019</option>
-		   	<option value='2020'>2020</option>
-		   	<option value='2021'>2021</option>
+			<option disabled>Select a Year</option>
+			@for($i=0; $i<=80; $i++) 
+		   		<option value='{{1970 + $i}}' @if( (1970 + $i)== date('Y') ) selected @endif>{{1970 + $i}}</option>
+		   	@endfor
 		</select>
 	</div>
 	<div class="padded-full">

@@ -8,7 +8,14 @@ use chilliapp\Models\Classes;
 use Auth;
 
 class ReportsController extends Controller
-{
+{   
+    /*  Only authenticated users can access all functions.
+    |--------------------------------------------------------------------------| */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index()	
     {	
     	$page = 'Reports';

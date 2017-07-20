@@ -24,6 +24,11 @@
     <div class="padded-full">
 		
 	</div>
+	<div class="padded-full">
+	<a href="{{ url('reports') }}">
+		<button class="btn fit-parent">Go Back</button>
+	</a>
+</div>
 @endsection
 
 @section('partials-script')

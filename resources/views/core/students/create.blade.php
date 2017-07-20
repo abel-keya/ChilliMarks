@@ -24,19 +24,19 @@
 <form method="POST" action="{{ url('create-student') }}">
 	{{ csrf_field() }}
 	<div class="padded-full">
-	    <h5 class="pull-right">Admission No.</h5>
+		<h5 class="pull-right">Adm No.</h5>
 	</div>
 	<div class="padded-full">
 		<input type="text" name="adm_no" value="{{ old('adm_no') }}" autocomplete="off" placeholder="Enter Student Adm. No." autofocus>
 	</div>
 	<div class="padded-full">
-	    <h5 class="pull-right">Name</h5>
+		<h5 class="pull-right">Name</h5>
 	</div>
 	<div class="padded-full">
 		<input type="text" name="name" value="{{ old('name') }}" autocomplete="off" placeholder="Enter Student Name">
 	</div>
 	<div class="padded-full">
-	    <h5 class="pull-right">Phone</h5>
+		<h5 class="pull-right">Phone</h5>
 	</div>
 	<div class="padded-full">
 		<input type="text" name="phone" value="{{ old('phone') }}" autocomplete="off" placeholder="Enter Phone No.">
@@ -46,25 +46,34 @@
 	</div>
 	<div class="padded-full">
 		<select name="year">
-			<option disabled selected>Select a Year</option> 
-		   	<option value='2017'>2017</option>
-		   	<option value='2018'>2018</option>
-		   	<option value='2019'>2019</option>
-		   	<option value='2020'>2020</option>
-		   	<option value='2021'>2021</option>
+			<option disabled>Select a Year</option>
+			@for($i=0; $i<=80; $i++) 
+		   		<option value='{{1970 + $i}}' @if( (1970 + $i)== date('Y') ) selected @endif>{{1970 + $i}}</option>
+		   	@endfor
 		</select>
 	</div>
 	<div class="padded-full">
-	    <h5 class="pull-right">Password</h5>
+		<ul class="list">
+			<li class="">
+				<label class="checkbox">
+				<input type="checkbox" name="defaultpassword" value="1">
+					Use default password: "password"
+					<span></span>
+				</label>
+			</li>
+		</ul>
 	</div>
 	<div class="padded-full">
-		<input type="password" name="password" autocomplete="off">
+		<h5 class="pull-right">Password</h5>
 	</div>
 	<div class="padded-full">
-	    <h5 class="pull-right">Re-type Password</h5>
+		<input type="password" name="password" autocomplete="off" placeholder="Password">
 	</div>
 	<div class="padded-full">
-		<input type="password" name="password_confirm" autocomplete="off">
+		<h5 class="pull-right">Re-type Password</h5>
+	</div>
+	<div class="padded-full">
+		<input type="password" name="password_confirm" autocomplete="off" placeholder="Re-type Password">
 	</div>
 	<div class="padded-full">
 		<button type="submit" class="btn fit-parent primary">Create Student</button>

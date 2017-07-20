@@ -21,7 +21,7 @@
         <script src="{{ asset('js/components/notifications.js') }}"></script>
     </head>
     <body>
-
+        @if(Auth::check())
         <div class="side-panel side-panel-left" data-expose-aside="left" data-disable="right" data-page="home" id="side-panel-identifier">
             <header class="header-bar">
                 <button class="btn pull-right icon icon-close show-for-phone-only" data-side-panel-close="true"></button>
@@ -31,22 +31,30 @@
             </header>
             <div class="content">
                 <ul class="list">
-                    <li><a class="padded-list" href="{{ url('exams') }}">Exams</a></li>
-                    <li><a class="padded-list" href="{{ url('classes') }}">Classes</a></li>
-                    <li><a class="padded-list" href="{{ url('teachers') }}">Teachers</a></li>
-                    <li><a class="padded-list" href="{{ url('students') }}">Students</a></li>
-                    <li><a class="padded-list" href="{{ url('reports') }}">Reports</a></li>
-                    <li><a class="padded-list" href="{{ url('messages') }}">Messaging</a></li>
-                    <li><a class="padded-list" href="{{ url('settings') }}">Settings</a></li>
+                    @if(Auth::user()->hasRole('superadmin') || Auth::user()->hasRole('admin'))
+                        <li><a class="padded-list" href="{{ url('exams') }}">Exams</a></li>
+                        <li><a class="padded-list" href="{{ url('teachers') }}">Teachers</a></li>
+                        <li><a class="padded-list" href="{{ url('students') }}">Students</a></li>
+                        <li><a class="padded-list" href="{{ url('reports') }}">Reports</a></li>
+                        <li><a class="padded-list" href="{{ url('messages') }}">Messaging</a></li>
+                        <li><a class="padded-list" href="{{ url('settings') }}">Settings</a></li>      
+                    @endif
+                    @if(Auth::user()->hasRole('teacher'))
+                        <li><a class="padded-list" href="">My Exams</a></li>    
+                    @endif
+                    <li><a class="padded-list" href="{{ url('signout') }}">Sign Out</a></li>
                 </ul>
             </div>
         </div>
+        @endif
 
         @yield('partials')
 
         <home data-page="true">
             <header class="header-bar">
-                <button class="btn icon icon-menu pull-left show-for-phone-only" data-side-panel-id="side-panel-identifier"></button>
+                @if(Auth::check())
+                    <button class="btn icon icon-menu pull-left show-for-phone-only" data-side-panel-id="side-panel-identifier"></button>
+                @endif
                 <div class="center">
                     <h1 class="title">{{ ucfirst($page) }}</h1>
                 </div>

@@ -61,6 +61,11 @@
 	<div class="padded-full">
 		<button type="submit" class="btn fit-parent primary">Download Report</button>
 	</div>
+	<div class="padded-full">
+		<a href="{{ url('reports') }}">
+			<button class="btn fit-parent">Go Back</button>
+		</a>
+	</div>
 </form>
 @endsection
 

@@ -2,30 +2,13 @@
 
 namespace chilliapp\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use chilliapp\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use chilliapp\Models\User;
+use Auth;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
-
-    use AuthenticatesUsers;
-
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
 
     /**
      * Create a new controller instance.
@@ -34,7 +17,14 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        $this->middleware('guest')->except('signout');
+    }
+
+    public function index()
+    {   
+        $page = 'ChilliApp';
+
+        return view('core.auth.signin', compact('page'));
     }
 
     public function signin(Request $request)
@@ -44,14 +34,17 @@ class LoginController extends Controller
             'password'  => 'required|min:8|max:255'
             ]);
 
-        if (Auth::attempt($request->only(['phone','password']),
-            $request->has('remember')))
+
+        if(Auth::attempt($request->only(['phone','password'])))
         {   
-            $user_id = Auth::user()->id;
-            
-            return redirect('/home');
+            if(Auth::user()->hasRole('teacher'))
+            {
+                return redirect('teacher-exams');
+            }
+
+            return redirect('exams');
         } else {
-            return redirect('/signin')->with('error','Incorrent credentials, please try again.');
+            return redirect()->back()->with('error','Incorrent credentials, please try again.');
         }
     }
 
@@ -59,6 +52,6 @@ class LoginController extends Controller
     {  
         Auth::logout();
 
-        return redirect('/signin');
+        return redirect('/');
     } 
 }

@@ -33,7 +33,10 @@
 </form>
 <div class="padded-full">
 	<a href="{{ url('create-student') }}">
-		<button class="btn fit-parent primary" style="margin-top: 10px;">Add New Student</button>
+		<button class="btn fit-parent primary">Add New Student</button>
+	</a>
+	<a href="{{ url('import-students') }}">
+		<button class="btn fit-parent primary" style="margin-top: 10px;">Import Students</button>
 	</a>	
 </div>
 <div class="padded-full">
@@ -41,12 +44,11 @@
 		<li class="divider text-center"><p>All students</p></li>
 	</ul>
 </div>
-
 <div class="padded-full">
 	<ul class="list">
 		@foreach($students as $student)
 			<li>
-				<a class="padded-list" href="{{ url('view-student, $student->id') }}">{{ $student->name }} {{ $student->class }} {{ $student->adm_no }}</a>
+				<a class="padded-list" href="{{ url('view-student', $student->id) }}">{{ $student->name }} {{ $student->class }} {{ $student->adm_no }}</a>
 			</li>
 		@endforeach
 	</ul>

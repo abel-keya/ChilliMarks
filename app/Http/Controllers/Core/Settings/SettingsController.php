@@ -6,7 +6,14 @@ use Illuminate\Http\Request;
 use chilliapp\Http\Controllers\Controller;
 
 class SettingsController extends Controller
-{
+{   
+    /*  Only authenticated users can access all functions.
+    |--------------------------------------------------------------------------| */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function index()
     {	
         $page = 'Settings';
@@ -18,7 +25,9 @@ class SettingsController extends Controller
     {	
         $page = 'About ChilliApp';
 
-    	return view('core.settings.about', compact('page'));
+        $year = date("Y");
+
+    	return view('core.settings.about', compact('page', 'year'));
     }
 
     public function license()

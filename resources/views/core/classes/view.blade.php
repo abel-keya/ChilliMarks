@@ -27,20 +27,33 @@
             <li><strong>Year:</strong> {{ $class->year }}</li>
         </ul>
     </div>
+    @if($streams->count()>0)
     <div class="padded-full">
-    	<a href="{{ url('edit-class', $class->id) }}">
-    		<button class="btn fit-parent primary">Edit Class</button>
-    	</a>
+        <ul class="list" style="padding: 20px 0px 20px 0px;">
+            <li class="divider text-center"><p>Streams</p></li>
+        </ul>
+    </div>
+    @endif
+    <div class="padded-full">
+        <ul class="list">
+            @foreach($streams as $stream)
+                <li><a href="{{ url('view-stream', $stream->id) }}"><strong>Stream Name:</strong> {{ $stream->name }}</a></li>
+            @endforeach
+        </ul>
     </div>
     <div class="padded-full">
-        <a href="{{ url('confirm-class', $class->id) }}">
-            <button class="btn fit-parent negative">Delete Class</button>
+        <a href="{{ url('create-stream', $class->id) }}">
+            <button class="btn fit-parent primary">Add a Stream</button>
         </a>
-    </div>
-    <div class="padded-full">
-    	<a href="{{ url('classes') }}">
-    		<button class="btn fit-parent">Go Back</button>
-    	</a>
+        <a href="{{ url('edit-class', $class->id) }}">
+            <button class="btn fit-parent primary" style="margin-top:10px;">Edit Class</button>
+        </a>
+        <a href="{{ url('confirm-class', $class->id) }}">
+            <button class="btn fit-parent negative" style="margin-top:10px;">Delete Class</button>
+        </a>
+        <a href="{{ url('classes') }}">
+            <button class="btn fit-parent" style="margin-top:10px;">Go Back</button>
+        </a>
     </div>
 @endsection
 

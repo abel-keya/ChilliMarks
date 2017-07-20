@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use chilliapp\Models\Role;
 use chilliapp\Models\User;
+use chilliapp\Models\Admission;
 
 class UsersSeeder extends Seeder
 {
@@ -36,7 +37,7 @@ class UsersSeeder extends Seeder
         $user = User::create([
             'name'            => 'Theresa Admin',
             'year'            => '2017',
-            'phone'           => '0703436696',
+            'phone'           => '0703436697',
             'password'        =>  bcrypt('password'),
             'from_user'       =>  1
         ]);
@@ -46,7 +47,7 @@ class UsersSeeder extends Seeder
         $user = User::create([
             'name'            => 'John Teacher',
             'year'            => '2017',
-            'phone'           => '0703436696',
+            'phone'           => '0703436698',
             'password'        =>  bcrypt('password'),
             'from_user'       =>  1
         ]);
@@ -56,9 +57,15 @@ class UsersSeeder extends Seeder
         $user = User::create([
             'name'            => 'Jane Student',
             'year'            => '2017',
-            'phone'           => '0703436696',
+            'phone'           => '0703436699',
             'password'        =>  bcrypt('password'),
             'from_user'       =>  1
+        ]);
+
+        Admission::create([
+            'user_id'         => 4,
+            'adm_no'          => '323',
+            'from_user'       => 1
         ]);
 
         $user->assignRole($studentRole);

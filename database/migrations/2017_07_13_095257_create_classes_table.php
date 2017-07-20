@@ -17,11 +17,11 @@ class CreateClassesTable extends Migration
             
             $table->increments('id');
             
-            $table->string('name');
+            $table->string('name')->index();
             
-            $table->string('year');
+            $table->string('year')->index();
             
-            $table->integer('from_user');
+            $table->integer('from_user')->unsigned()->index();
             
             $table->timestamps();
         });

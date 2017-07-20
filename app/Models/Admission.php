@@ -8,9 +8,9 @@ class Admission extends Model
 {
     protected $fillable = ['user_id', 'adm_no', 'from_user'];
 
-    public function user()
+    public function adm_no()
     {
-    	return $this->belongsTo('chilliapp\Models\User','user_id');
+    	return $this->belongsTo('chilliapp\Models\User','adm_no');
   	}
 
   	public function fromUser()

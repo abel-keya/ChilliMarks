@@ -40,12 +40,11 @@
 		<li class="divider text-center"><p>All classes</p></li>
 	</ul>
 </div>
-
 <div class="padded-full">
 	<ul class="list">
 		@foreach($classes as $class)
 		<li>
-			<a class="padded-list" href="{{ url('view-class', $class->id) }}">{{$class->name}} {{$class->year}}</a>
+			<a class="padded-list" href="{{ url('view-class', $class->id) }}">{{$class->name}}, {{$class->year}}</a>
 		</li>
 		@endforeach
 	</ul>

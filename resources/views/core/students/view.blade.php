@@ -23,25 +23,50 @@
 @section('body')
 	<div class="padded-full">
 		<ul class="list">
-			<li><strong>Admission No:</strong> {{ $student->adm_no }}</li>
+			<li><strong>Admission No:</strong> {{ $student->admission->adm_no }}</li>
 			<li><strong>Student Name:</strong> {{ $student->name }}</li>
 			<li><strong>Phone:</strong> {{ $student->phone }}</li>
 			<li><strong>Year:</strong> {{ $student->year }}</li>
+			@if($student->streams->count()>0)
+			<li>
+				<strong>Streams:</strong> 
+				@foreach($student->streams as $stream)
+                    {{$stream->name}}@if($student->streams->count()>1). @endif
+                @endforeach 
+			</li>
+			@endif
+
+			@if($student->groups->count()>0)
+			<li>
+				<strong>Groups:</strong> 
+				@foreach($student->groups as $group)
+                    {{$group->name}}@if($student->groups->count()>1). @endif
+                @endforeach 
+			</li>
+			@endif
 		</ul>
 	</div>
 	<div class="padded-full">
 		<a href="{{ url('edit-student', $student->id) }}">
-			<button class="btn fit-parent primary">Edit Student</button>
+			<button class="btn fit-parent primary" style="margin-top: 10px;">Edit Student</button>
 		</a>
-	</div>
-	<div class="padded-full">
+		<a href="{{ url('select-attach-group', $student->id) }}">
+			<button class="btn fit-parent primary" style="margin-top: 10px;">Assign Group</button>
+		</a>
+		<a href="{{ url('select-detach-group', $student->id) }}">
+			<button class="btn fit-parent primary" style="margin-top: 10px;">Detach Group</button>
+		</a>
+		<a href="{{ url('select-attach-stream', $student->id) }}">
+			<button class="btn fit-parent primary" style="margin-top: 10px;">Assign Stream</button>
+		</a>
+		<a href="{{ url('select-detach-stream', $student->id) }}">
+			<button class="btn fit-parent primary" style="margin-top: 10px;">Detach Stream</button>
+		</a>
 		<a href="{{ url('confirm-student', $student->id) }}">
-			<button class="btn fit-parent negative">Delete Student</button>
+			<button class="btn fit-parent negative" style="margin-top: 10px;">Delete Student</button>
 		</a>
-	</div>
-	<div class="padded-full">
 		<a href="{{ url('students') }}">
-			<button class="btn fit-parent">Go Back</button>
+			<button class="btn fit-parent" style="margin-top: 10px;">Go Back</button>
 		</a>
 	</div>
 @endsection

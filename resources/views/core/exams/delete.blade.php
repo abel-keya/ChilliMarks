@@ -11,6 +11,6 @@
 	    </div>
 	</form>
 	<div class="padded-full">
-	    <a href="{{ url('exams', $exam->id) }}"><button class="btn fit-parent primary">No, Go Back</button></a>
+	    <a href="{{ url('view-exam', $exam->id) }}"><button class="btn fit-parent">No, Go Back</button></a>
     </div>
 @endsection
