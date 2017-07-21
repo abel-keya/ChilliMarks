@@ -40,6 +40,7 @@
 	<div class="padded-full">
 		<select name="wherestream">
 			<option selected disabled>Select a Stream</option>
+			<option value="0">is not assigned</option>
 			@foreach($streams as $stream)
 				<option value="{{$stream->id}}">{{ $stream->name }}</option>
 			@endforeach

@@ -6,14 +6,7 @@ use Illuminate\Http\Request;
 use chilliapp\Http\Controllers\Controller;
 
 class SettingsController extends Controller
-{   
-    /*  Only authenticated users can access all functions.
-    |--------------------------------------------------------------------------| */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-    
+{  
     public function index()
     {	
         $page = 'Settings';

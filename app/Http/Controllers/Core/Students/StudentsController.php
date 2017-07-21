@@ -7,6 +7,8 @@ use chilliapp\Http\Controllers\Controller;
 use chilliapp\Models\User;
 use chilliapp\Models\Role;
 use chilliapp\Models\Admission;
+use chilliapp\Models\Group;
+use chilliapp\Models\Stream;
 use Auth;
 use Excel;
 use Illuminate\Support\Facades\Input;
@@ -14,12 +16,6 @@ use DB;
 
 class StudentsController extends Controller
 {   
-    /*  Only authenticated users can access all functions.
-    |--------------------------------------------------------------------------| */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     
     public function index()
     {
@@ -268,8 +264,6 @@ class StudentsController extends Controller
 
         $mime = $request->file('import')->getClientMimeType();
 
-        //return dd($mime);
-
         $mimetypes = ['application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'];
 
         if($mime == $mimetypes[0] || $mime == $mimetypes[1])
@@ -335,5 +329,75 @@ class StudentsController extends Controller
         }
 
     }
+
+    public function bulkactions()
+    {
+        $page = 'Students Bulk Actions';
+
+        return view('core.students.bulk', compact('page'));
+    }
+
+    public function bulkdelete()
+    {
+        $page = 'Delete Many Students';
+
+        return view('core.students.bulk-delete', compact('page'));
+    }
+
+    public function postbulkdelete(Request $request)
+    {
+        $this->validate($request, [
+              'bulk'         => 'required'
+        ]);
+
+        $bulk                     = $request->input('bulk');
+
+        if($bulk=='streams')
+        {
+            $streams = Stream::get();
+
+            $users  = User::whereHas(
+                            'roles', function($q){
+                                $q->where('name', 'student');
+                            }
+                        )->doesntHave('streams')->get();
+
+            $count_users = count($users);
+
+            foreach($users as $user)
+            {
+                $user->delete();
+            }
+
+            $message = $count_users. ' students without streams deleted!';
+
+        } elseif($bulk=='groups') {
+
+            $groups = Group::get();
+
+            $users  = User::whereHas(
+                            'roles', function($q){
+                                $q->where('name', 'student');
+                            }
+                        )->doesntHave('groups')->get();
+
+            $count_users = count($users);
+
+            foreach($users as $user)
+            {
+                $user->delete();
+            }
+
+            $message = $count_users. ' students without groups deleted!';
+
+        } else {
+
+            $message = 'No students have been deleted!';
+        }
+
+        return redirect('students')->with('success', $message);
+
+    }
+
 }
 

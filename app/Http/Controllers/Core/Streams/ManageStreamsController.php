@@ -10,13 +10,6 @@ use chilliapp\Models\Group;
 
 class ManageStreamsController extends Controller
 {   
-    /*  Only authenticated users can access all functions.
-    |--------------------------------------------------------------------------| */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function selectAttachStream($id)
     {
     	$page = 'Assign Stream';
@@ -138,7 +131,25 @@ class ManageStreamsController extends Controller
         $assignstream  = $request->input('assignstream');
         $wherestream   = $request->input('wherestream');
 
-        $users               = User::whereHas(
+        $assignstream   = Stream::whereId($assignstream)->first();
+
+        if($wherestream  == 0)
+        {
+            $streams = Stream::get();
+
+            $users          = User::whereHas(
+                                'roles', function($q){
+                                    $q->where('name', 'student');
+                                }
+                            )->doesntHave('streams')->get();
+
+            foreach ($users as $user) {
+                $user->assignStream($assignstream); 
+            }
+
+        } else {
+
+            $users  = User::whereHas(
                             'roles', function($q){
                                 $q->where('name', 'student');
                             }
@@ -148,15 +159,14 @@ class ManageStreamsController extends Controller
                             }
                         )->get();
 
-        $assignstream   = Stream::whereId($assignstream)->first();
-        
-        foreach ($users as $user) {
-            $user->assignStream($assignstream); 
+            foreach ($users as $user) {
+                $user->assignStream($assignstream); 
+            }
         }
 
         $message = 'Stream assigned successfully!';
 
-        return redirect()->back()->with('success', $message);
+        return redirect('manage-streams')->with('success', $message);
 
     }
 

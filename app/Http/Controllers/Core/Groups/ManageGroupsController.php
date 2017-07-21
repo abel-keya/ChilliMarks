@@ -9,12 +9,6 @@ use chilliapp\Models\User;
 
 class ManageGroupsController extends Controller
 {   
-    /*  Only authenticated users can access all functions.
-    |--------------------------------------------------------------------------| */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     
     public function index()
     {
@@ -146,12 +140,30 @@ class ManageGroupsController extends Controller
                 'wheregroup'         => 'required'
         ]);
 
-        $group       = $request->input('group');
+        $group          = $request->input('group');
 
-        $assigngroup  = $request->input('assigngroup');
-        $wheregroup   = $request->input('wheregroup');
+        $assigngroup    = $request->input('assigngroup');
+        $wheregroup     = $request->input('wheregroup');
 
-        $users               = User::whereHas(
+        $assigngroup   = Group::whereId($assigngroup)->first();
+
+        if($wheregroup  == 0)
+        {
+            $groups = Group::get();
+
+            $users          = User::whereHas(
+                                'roles', function($q){
+                                    $q->where('name', 'student');
+                                }
+                            )->doesntHave('groups')->get();
+
+            foreach ($users as $user) {
+                $user->assignGroup($assigngroup); 
+            }
+
+        } else {
+
+            $users               = User::whereHas(
                             'roles', function($q){
                                 $q->where('name', 'student');
                             }
@@ -161,16 +173,14 @@ class ManageGroupsController extends Controller
                             }
                         )->get();
 
-        $assigngroup   = Group::whereId($assigngroup)->first();
-        
-        foreach ($users as $user) {
-            $user->assignGroup($assigngroup); 
-        }
+            foreach ($users as $user) {
+                $user->assignGroup($assigngroup); 
+            }
+        }   
 
         $message = 'Group assigned successfully!';
 
-        return redirect()->back()->with('success', $message);
-
+        return redirect('manage-groups')->with('success', $message);
     }
 
     public function detachmany()
@@ -210,6 +220,6 @@ class ManageGroupsController extends Controller
 
         $message = 'Group detached successfully!';
 
-        return redirect()->back()->with('success', $message);
+        return redirect('manage-groups')->with('success', $message);
     }
 }

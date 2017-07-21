@@ -40,6 +40,7 @@
 	<div class="padded-full">
 		<select name="wheregroup">
 			<option selected disabled>Select a Group</option>
+				<option value="0">is not assigned</option>
 			@foreach($groups as $group)
 				<option value="{{$group->id}}">{{ $group->name }}</option>
 			@endforeach

@@ -74,7 +74,7 @@ Route::get('view-stream/{id}',      ['uses' => 'Core\Streams\StreamsController@v
 
 Route::get('create-stream/{id}',    ['uses' => 'Core\Streams\StreamsController@create']);
 
-Route::post('create-stream/{id}',        ['uses' => 'Core\Streams\StreamsController@postcreate']);
+Route::post('create-stream/{id}',   ['uses' => 'Core\Streams\StreamsController@postcreate']);
 
 Route::get('edit-stream/{id}',      ['uses' => 'Core\Streams\StreamsController@edit']);
 
@@ -104,6 +104,12 @@ Route::post('update-student/{id}', ['uses' => 'Core\Students\StudentsController@
 Route::get('confirm-student/{id}', ['uses' => 'Core\Students\StudentsController@confirm']);
 
 Route::post('delete-student/{id}', ['uses' => 'Core\Students\StudentsController@delete']);
+
+Route::get('student-bulk-actions', ['uses' => 'Core\Students\StudentsController@bulkactions']);
+
+Route::get('student-bulk-delete',  ['uses' => 'Core\Students\StudentsController@bulkdelete']);
+
+Route::post('student-bulk-delete', ['uses' => 'Core\Students\StudentsController@postbulkdelete']);
 
 
 /*	Teachers Routes

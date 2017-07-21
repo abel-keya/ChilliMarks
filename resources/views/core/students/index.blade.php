@@ -35,8 +35,8 @@
 	<a href="{{ url('create-student') }}">
 		<button class="btn fit-parent primary">Add New Student</button>
 	</a>
-	<a href="{{ url('import-students') }}">
-		<button class="btn fit-parent primary" style="margin-top: 10px;">Import Students</button>
+	<a href="{{ url('student-bulk-actions') }}">
+		<button class="btn fit-parent primary" style="margin-top: 10px;">Bulk actions</button>
 	</a>	
 </div>
 <div class="padded-full">
