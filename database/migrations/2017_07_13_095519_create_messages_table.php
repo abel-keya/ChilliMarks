@@ -21,6 +21,8 @@ class CreateMessagesTable extends Migration
 
             $table->integer('from_user')->unsigned()->index();
 
+            $table->foreign('from_user')->references('id')->on('users')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

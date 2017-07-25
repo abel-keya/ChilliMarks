@@ -27,13 +27,28 @@
         <li><strong>Subject:</strong> {{ $exam->subject->name }}</li>
         <li><strong>Teacher:</strong> {{ $exam->teacher->name }}</li>
         <li><strong>Class:</strong> {{ $exam->stream->name }}</li>
-        <li><strong>Period:</strong> {{ $exam->period }}</li>
-        <li><strong>Year:</strong> {{ $exam->year }}</li>
+        <li><strong>Period:</strong> {{ $exam->period }}, {{ $exam->year }}</li>
     </ul>
 </div>
 <div class="padded-full">
+    <ul class="list">
+        <li class="divider text-center"><p>Assessments</p></li>
+    </ul>
+</div>
+<div class="padded-full">
+    <ul class="list">
+        @foreach($assessments as $assessment)
+            <li><a href="{{ url('view-assessment', $assessment->id) }}"> <strong>{{ $assessment->name }}:</strong> Out of {{ $assessment->out_of }} marks 
+            ({{ number_format((float)$assessment->contribution,0, '.', '') }}%)</a></li>
+        @endforeach
+    </ul>
+</div>
+<div class="padded-full">
+    <a href="{{ url('create-assessment', $exam->id) }}">
+        <button class="btn fit-parent primary">Create Assessment</button>
+    </a>
     <a href="{{ url('view-grades', $exam->id) }}">
-        <button class="btn fit-parent primary">View Grades</button>
+        <button class="btn fit-parent primary" style="margin-top: 10px;">View Grades</button>
     </a>
     <a href="{{ url('edit-exam', $exam->id) }}">
         <button class="btn fit-parent primary" style="margin-top: 10px;">Edit Exam</button>

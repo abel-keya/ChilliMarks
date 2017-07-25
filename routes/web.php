@@ -39,13 +39,42 @@ Route::get('confirm-exam/{id}',    ['uses' => 'Core\Exams\ExamsController@confir
 
 Route::post('delete-exam/{id}',    ['uses' => 'Core\Exams\ExamsController@delete']);
 
+/*	Assessment Routes
+|--------------------------------------------------------------------------| */
+
+Route::get('view-assessment/{id}',       ['uses' => 'Core\Exams\AssessmentsController@view'])->name('view-assessment');
+
+Route::get('create-assessment/{id}',     ['uses' => 'Core\Exams\AssessmentsController@create']);
+
+Route::post('create-assessment/{id}',         ['uses' => 'Core\Exams\AssessmentsController@postcreate']);
+
+Route::get('edit-assessment/{id}',       ['uses' => 'Core\Exams\AssessmentsController@edit']);
+
+Route::post('update-assessment/{id}',    ['uses' => 'Core\Exams\AssessmentsController@update']);
+
+Route::get('confirm-assessment/{id}',    ['uses' => 'Core\Exams\AssessmentsController@confirm']);
+
+Route::post('delete-assessment/{id}',    ['uses' => 'Core\Exams\AssessmentsController@delete']);
+
 /*	Grades Routes
 |--------------------------------------------------------------------------| */
-Route::get('view-grades/{id}',     ['uses' => 'Core\Exams\GradesController@view'])->name('view-grades');
+Route::get('edit-grade/{id}',             ['uses' => 'Core\Exams\GradesController@edit']);
+ 
+Route::post('update-grade/{id}',          ['uses' => 'Core\Exams\GradesController@update']);
 
-Route::get('view-teacher-grades/{id}',   ['uses' => 'Core\Exams\GradesController@grades'])->name('view-teacher-grades');
+Route::get('view-grades/{id}',            ['uses' => 'Core\Exams\GradesController@view'])->name('view-grades');
 
-Route::post('submit-grades/{id}',    ['uses' => 'Core\Exams\GradesController@postgrades']);
+Route::get('confirm-grade/{id}',          ['uses' => 'Core\Exams\GradesController@confirm']);
+
+Route::post('delete-grade/{id}',          ['uses' => 'Core\Exams\GradesController@delete']);
+
+Route::get('view-teacher-grades/{id}',    ['uses' => 'Core\Exams\GradesController@grades'])->name('view-teacher-grades');
+
+Route::post('submit-grades/{id}',         ['uses' => 'Core\Exams\GradesController@postgrades']);
+
+Route::get('create-select-grades/{id}',   ['uses' => 'Core\Exams\GradesController@createselect'])->name('create-select-grades');
+
+Route::post('create-select-grades/{id}',  ['uses' => 'Core\Exams\GradesController@postcreateselect']);
 
 /*	Classes Routes
 |--------------------------------------------------------------------------| */
@@ -154,7 +183,21 @@ Route::get('view-message/{id}',    ['uses' => 'Core\Messaging\MessagingControlle
 |--------------------------------------------------------------------------| */
 Route::get('reports',              ['uses' => 'Core\Reports\ReportsController@index']);
  
-Route::get('student-reports',      ['uses' => 'Core\Reports\ReportsController@students']);
+Route::get('report-forms',         ['uses' => 'Core\Reports\ReportsController@reportforms']);
+
+Route::post('report-forms',        ['uses' => 'Core\Reports\ReportsController@postreportform']);
+
+Route::get('stream-reports',       ['uses' => 'Core\Reports\ReportsController@streamreports']);
+
+Route::post('stream-report',       ['uses' => 'Core\Reports\ReportsController@poststreamreport']);
+
+Route::get('overall-class-reports',       ['uses' => 'Core\Reports\ReportsController@overallclassreports']);
+
+Route::post('overall-class-report',       ['uses' => 'Core\Reports\ReportsController@postoverallclassreport']);
+
+Route::get('group-reports',        ['uses' => 'Core\Reports\ReportsController@groupreports']);
+
+Route::post('group-report',        ['uses' => 'Core\Reports\ReportsController@postgroupreports']);
 
 Route::post('student-reports',     ['uses' => 'Core\Reports\ReportsController@poststudents']);
 

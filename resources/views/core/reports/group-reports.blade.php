@@ -21,7 +21,7 @@
 @endsection
 
 @section('body')
-<form method="POST" action="{{ url('create-exam') }}">
+<form method="POST" action="{{ url('group-report') }}">
 	{{ csrf_field() }}
 	<div class="padded-full">
 		<select name="name">
@@ -32,26 +32,10 @@
 		</select>
 	</div>
 	<div class="padded-full">
-		<select name="subject_id">
-			<option disabled selected>Select a Subject</option>
-			@foreach($subjects as $subject)
-		    	<option value='{{ $subject->id }}'>{{$subject->name}}</option>
-		    @endforeach
-		</select>
-	</div>
-	<div class="padded-full">
-		<select name="teacher_id">
-			<option disabled selected>Select a Teacher</option>
-		    @foreach($teachers as $teacher)
-		    	<option value='{{ $teacher->id }}'>{{ $teacher->name }}</option>
-		    @endforeach
-		</select>
-	</div>
-	<div class="padded-full">
-		<select name="stream_id">
-			<option disabled selected>Select a Stream</option>
-		    @foreach($streams as $stream)
-		    	<option value='{{ $stream->id }}'>{{ $stream->name }}</option>
+		<select name="class_id">
+			<option disabled selected>Select a Group</option>
+		    @foreach($groups as $group)
+		    	<option value='{{ $group->id }}'>{{ $group->name }}</option>
 		    @endforeach
 		</select>
 	</div>
@@ -62,7 +46,7 @@
 		   	<option value='Term 2'>Term 2</option>
 		   	<option value='Term 3'>Term 3</option>
 		</select>
-	</div>
+	</div>	
 	<div class="padded-full">
 		<select name="year">
 			<option disabled>Select a Year</option>
@@ -72,12 +56,14 @@
 		</select>
 	</div>
 	<div class="padded-full">
-		<button type="submit" class="btn fit-parent primary">Create Exam</button>
-		<a href="{{ url('exams') }}">
+		<button type="submit" class="btn fit-parent primary">Download Report</button>
+	</div>
+</form>
+	<div class="padded-full">
+		<a href="{{ url('reports') }}">
 			<button class="btn fit-parent" style="margin-top: 10px;">Go Back</button>
 		</a>
 	</div>
-</form>
 @endsection
 
 @section('partials-script')

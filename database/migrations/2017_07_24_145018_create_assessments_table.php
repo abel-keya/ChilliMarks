@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGroupsTable extends Migration
+class CreateAssessmentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,25 @@ class CreateGroupsTable extends Migration
      */
     public function up()
     {
-        Schema::create('groups', function (Blueprint $table) {
+        Schema::create('assessments', function (Blueprint $table) {
             
             $table->increments('id');
 
+            $table->integer('exam_id')->unsigned()->index();
+
             $table->string('name')->index();
+
+            $table->double('out_of')->nullable()->index();
+
+            $table->double('contribution')->index();
+
+            $table->integer('status')->unsigned()->index();
 
             $table->integer('from_user')->unsigned()->index();
 
             $table->foreign('from_user')->references('id')->on('users')->onDelete('cascade');
 
-            $table->timestamps();
+            $table->timestamps(); 
         });
     }
 
@@ -34,6 +42,6 @@ class CreateGroupsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('groups');
+        Schema::dropIfExists('assessments');
     }
 }

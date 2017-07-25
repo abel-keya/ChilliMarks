@@ -23,8 +23,10 @@
 @section('body')
     <div class="padded-full">
 		<ul class="list">
-			<li><a href="{{ url('student-reports') }}">Student Reports</a></li>
-			<li><a href="{{ url('classes-reports') }}">Class Reports</a></li>
+			<li><a href="{{ url('report-forms') }}">Report Forms</a></li>
+			<li><a href="{{ url('stream-reports') }}">Stream Reports</a></li>
+			<li><a href="{{ url('overall-class-reports') }}">Overall Class Reports</a></li>
+			<li><a href="{{ url('group-reports') }}">Group Reports</a></li>
 		</ul>
 	</div>
 @endsection

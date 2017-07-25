@@ -24,6 +24,8 @@ class CreateSchoolTable extends Migration
             $table->string('phone')->index();
             
             $table->integer('from_user')->unsigned()->index();
+
+            $table->foreign('from_user')->references('id')->on('users')->onDelete('cascade');
             
             $table->timestamps();
         });

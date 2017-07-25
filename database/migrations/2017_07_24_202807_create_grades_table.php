@@ -17,15 +17,19 @@ class CreateGradesTable extends Migration
             
             $table->increments('id');
 
-            $table->integer('exam_id')->unsigned()->index();
+            $table->integer('assessment_id')->unsigned()->index();
 
             $table->integer('student_id')->unsigned()->index();
 
-            $table->double('grade')->unsigned()->index();
+            $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade');
+
+            $table->double('marks')->unsigned()->index();
 
             $table->integer('status')->unsigned()->index();
 
             $table->integer('from_user')->unsigned()->index();
+
+            $table->foreign('from_user')->references('id')->on('users')->onDelete('cascade');
 
             $table->timestamps();
         });

@@ -115,4 +115,12 @@ class User extends Authenticatable
         return $this->streams()->detach($stream);
     }
 
+
+    /*  Assessment User Relationship
+    |--------------------------------------------------------------------------| */
+
+    public function grades()
+    {
+        return $this->hasMany('chilliapp\Models\Grade', 'student_id');
+    }
 }

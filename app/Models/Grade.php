@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Grade extends Model
 {
-    protected $fillable = ['exam_id', 'student_id', 'grade', 'status', 'from_user'];
+    protected $fillable = ['assessment_id', 'student_id', 'marks', 'status', 'from_user'];
 
-    public function exam()
+    public function assessment()
     {
-    	return $this->belongsTo('chilliapp\Models\Exam');
+    	return $this->belongsTo('chilliapp\Models\Assessment');
   	}
 
   	public function student()

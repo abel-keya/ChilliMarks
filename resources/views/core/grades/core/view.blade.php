@@ -23,30 +23,32 @@
 
 @section('body')
 	<div class="padded-full">
-		<ul class="list">
-	        <li><strong>Exam Name:</strong> {{ $exam->name }}</li>
-	        <li><strong>Subject:</strong> {{ $exam->subject->name }}</li>
-	        <li><strong>Teacher:</strong> {{ $exam->teacher->name }}</li>
-	        <li><strong>Class:</strong> {{ $exam->stream->name }}</li>
-	        <li><strong>Period:</strong> {{ $exam->period }}</li>
-	        <li><strong>Year:</strong> {{ $exam->year }}</li>
+	    <ul class="list">
+	        <li><strong>Assessment:</strong> {{ $assessment->name }}, {{ $assessment->exam->name}}</li>
+	        <li><strong>Subject:</strong> {{ $assessment->exam->subject->name }}</li>
+	        <li><strong>Teacher:</strong> {{ $assessment->exam->teacher->name }}</li>
+	        <li><strong>Period:</strong> {{ $assessment->exam->period }}, {{ $assessment->exam->year }}</li>
+	        <li><strong>Out of:</strong> {{ $assessment->out_of }} marks</li>
+	        <li><strong>Contribution:</strong> {{ $assessment->contribution }} %</li>
 	    </ul>
 	</div>
-	<div class="padded-full">
-		<ul class="list" style="padding: 20px 0px 20px 0px;">
-			<li class="divider text-center"><p>All Grades</p></li>
-		</ul>
-	</div>
+	@if($grades->count()>0)
+		<div class="padded-full">
+			<ul class="list">
+				<li class="divider text-center"><p>All Grades</p></li>
+			</ul>
+		</div>
+	    <div class="padded-full">
+	        <ul class="list">
+	        	@foreach($grades as $key => $grade)
+	            	<li>{{++$key}}) {{ $grade->student->name }}: @if($grade->status==0) <span style="color:green;">Pending</span> @else {{ $grade->grade }} @endif</li>
+	            @endforeach
+	        </ul>
+	    </div>
+	@endif
     <div class="padded-full">
-        <ul class="list">
-        	@foreach($grades as $key => $grade)
-            	<li>{{++$key}}) {{ $grade->student->name }}: @if($grade->status==0) <span style="color:green;">Pending</span> @else {{ $grade->grade }} @endif</li>
-            @endforeach
-        </ul>
-    </div>
-    <div class="padded-full">
-    	<a href="{{ url('view-exam', $exam->id) }}">
-    		<button class="btn fit-parent">Go Back</button>
+    	<a href="{{ url('view-assessment', $assessment->id) }}">
+    		<button class="btn fit-parent primary">Go Back</button>
     	</a>
     </div>
 @endsection

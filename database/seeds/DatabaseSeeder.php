@@ -15,13 +15,13 @@ class DatabaseSeeder extends Seeder
 
         Model::unguard();
         
-        $this->call('SchoolSeeder');
-
-        $this->call('SubjectsSeeder');
-
         $this->call('RolesSeeder');
 
         $this->call('UsersSeeder');
+        
+        $this->call('SchoolSeeder');
+
+        $this->call('SubjectsSeeder');
 
         Model::reguard();
     }

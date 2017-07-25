@@ -19,9 +19,13 @@ class CreateAdmissionsTable extends Migration
 
             $table->integer('user_id')->unsigned()->index();
 
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
             $table->string('adm_no')->index();
 
             $table->integer('from_user')->unsigned()->index();
+
+            $table->foreign('from_user')->references('id')->on('users')->onDelete('cascade');
             
             $table->timestamps();
         });

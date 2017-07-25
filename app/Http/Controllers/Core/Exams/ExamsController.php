@@ -10,6 +10,7 @@ use chilliapp\Models\User;
 use chilliapp\Models\Classes;
 use chilliapp\Models\Stream;
 use chilliapp\Models\Grade;
+use chilliapp\Models\Assessment;
 use Auth;
 
 class ExamsController extends Controller
@@ -73,7 +74,9 @@ class ExamsController extends Controller
 
     	$exam = Exam::whereId($id)->first();
 
-    	return view('core.exams.view', compact('page', 'exam'));
+        $assessments = Assessment::whereExamId($exam->id)->get();
+
+    	return view('core.exams.view', compact('page', 'exam', 'assessments'));
     }
 
     public function create()
@@ -97,13 +100,13 @@ class ExamsController extends Controller
     public function postcreate(Request $request)
     {
     	$this->validate($request, [
-          'name'                 => 'required|min:1',
-          'subject_id'           => 'required',
-          'teacher_id'           => 'required',
-          'stream_id'            => 'required',
-          'period'               => 'required',
-          'year'                 => 'required'
-          ]);
+        'name'                 => 'required|min:1',
+        'subject_id'           => 'required',
+        'teacher_id'           => 'required',
+        'stream_id'            => 'required',
+        'period'               => 'required',
+        'year'                 => 'required'
+        ]);
 
     	$name                     = $request->input('name');
     	$subject_id               = $request->input('subject_id');
@@ -113,48 +116,20 @@ class ExamsController extends Controller
       $year                     = $request->input('year');
       $from_user                = Auth::user()->id;
 
-
-      $students          = User::WhereHas(
-                            'streams', function($q) use ($stream_id){
-                                $q->where('stream_id', $stream_id);
-                            }
-                        )->get();
-
-      if($students->count()>0)
-      {
-        $exam                     = Exam::create([
-          'name'                => $name,
-          'subject_id'          => $subject_id,
-          'teacher_id'          => $teacher_id,
-          'stream_id'           => $stream_id,
-          'period'              => $period,
-          'year'                => $year,
-          'status'              => 0,
-          'from_user'           => $from_user
+      $exam                     = Exam::create([
+        'name'                => $name,
+        'subject_id'          => $subject_id,
+        'teacher_id'          => $teacher_id,
+        'stream_id'           => $stream_id,
+        'period'              => $period,
+        'year'                => $year,
+        'status'              => 0,
+        'from_user'           => $from_user
         ]);
 
-        foreach($students as $student)
-        {
-          $grade = Grade::create([
-              'exam_id'             => $exam->id,
-              'student_id'          => $student->id,
-              'grade'               => 0,
-              'status'              => 0,
-              'from_user'           => $from_user
-          ]);
-        }
+      $message = 'Exam created successfully!';
 
-        $message = 'Exam & Grades created successfully!';
-
-        return redirect('exams')->with('success', $message);
-
-      } else {
-
-        $message = 'Sorry, Exams & Grades were not created since there are no students in that class!';
-
-        return redirect('exams')->with('success', $message);
-      }
-
+      return redirect('exams')->with('success', $message);
     }
 
     public function edit($id)
@@ -183,7 +158,9 @@ class ExamsController extends Controller
         'subject_id'           => 'required',
         'teacher_id'           => 'required',
         'stream_id'            => 'required',
-        ]);
+        'period'               => 'required',
+        'year'                 => 'required'
+      ]);
 
     	$name                     = $request->input('name');
     	$subject_id               = $request->input('subject_id');
