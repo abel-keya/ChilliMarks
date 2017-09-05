@@ -44,7 +44,7 @@ class StudentsController extends Controller
         $query                  = $request->input('search');
 
 
-        $students = Student::where('name', 'LIKE', '%' . $query . '%')
+        $students = User::where('name', 'LIKE', '%' . $query . '%')
             ->orwhere('year', 'LIKE', '%' . $query . '%')
             ->orwhere('phone', 'LIKE', '%' . $query . '%')
             ->orWhereHas('admission', function ($term) use($query) {

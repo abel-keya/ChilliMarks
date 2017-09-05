@@ -35,7 +35,7 @@ class TeachersController extends Controller
         $query                  = $request->input('search');
 
 
-        $teachers = Teacher::where('name', 'LIKE', '%' . $query . '%')
+        $teachers = User::where('name', 'LIKE', '%' . $query . '%')
             ->orwhere('year', 'LIKE', '%' . $query . '%')
             ->orwhere('phone', 'LIKE', '%' . $query . '%')
             ->get();
