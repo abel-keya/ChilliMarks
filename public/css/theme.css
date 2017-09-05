@@ -207,3 +207,8 @@
 .bd-clinical {
   border: 2px solid grey;
 }
+
+input:invalid, .input-invalid {
+    border-bottom-width: 2px !important;
+    border-color: #0084e7 !important;
+}

@@ -90,7 +90,7 @@ Route::middleware(['auth'])->group(function () {
 
 	/*	Classes Routes
 	|--------------------------------------------------------------------------| */
-	Route::get('classes',              ['uses' => 'Core\Classes\ClassesController@index']);
+	Route::get('classes',              ['uses' => 'Core\Classes\ClassesController@index'])->name('classes');;
 
 	Route::post('search-classes',      ['uses' => 'Core\Classes\ClassesController@search']);
 

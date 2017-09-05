@@ -23,7 +23,7 @@
 		<div class="padded-full">
 			<?php echo e(csrf_field()); ?>
 
-			<input type="text" name="search" placeholder="Search Teachers" autocomplete="off" autofocus/>
+			<input type="text" name="search" placeholder="Search Teachers" autocomplete="off" autofocus required="true" />
 		</div>
 		<div class="padded-full">
 			<button type="submit" class="btn fit-parent primary">Search</button>
@@ -45,16 +45,15 @@
 			<?php $__currentLoopData = $teachers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $teacher): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 			<li>
 				<a class="padded-list" href="<?php echo e(url('view-teacher', $teacher->id)); ?>">
-					<?php echo e($teacher->name); ?>,
-
+					<?php echo e($teacher->name); ?>
 
 					<?php $__currentLoopData = $teacher->subjects; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subject): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-						<strong><?php echo e($subject->abbr); ?></strong>:
+						<strong>: <?php echo e($subject->abbr); ?></strong>:
 					<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 					
 
 					<?php $__currentLoopData = $teacher->streams; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $stream): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-						<?php echo e($stream->abbr); ?> <?php if($teacher->streams->count()>1): ?>. <?php endif; ?>
+						<?php echo e($stream->abbr); ?><?php if($teacher->streams->count()>1): ?>. <?php endif; ?>
 					<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 				</a>
 			</li>

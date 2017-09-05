@@ -57,17 +57,17 @@
 		<a href="{{ url('edit-student', $student->id) }}">
 			<button class="btn fit-parent primary" style="margin-top: 10px;">Edit Student</button>
 		</a>
-		<a href="{{ url('select-attach-group', $student->id) }}">
-			<button class="btn fit-parent primary" style="margin-top: 10px;">Assign Group</button>
-		</a>
-		<a href="{{ url('select-detach-group', $student->id) }}">
-			<button class="btn fit-parent primary" style="margin-top: 10px;">Detach Group</button>
-		</a>
 		<a href="{{ url('select-attach-stream', $student->id) }}">
 			<button class="btn fit-parent primary" style="margin-top: 10px;">Assign Stream</button>
 		</a>
 		<a href="{{ url('select-detach-stream', $student->id) }}">
 			<button class="btn fit-parent primary" style="margin-top: 10px;">Detach Stream</button>
+		</a>
+		<a href="{{ url('select-attach-group', $student->id) }}">
+			<button class="btn fit-parent primary" style="margin-top: 10px;">Assign Group</button>
+		</a>
+		<a href="{{ url('select-detach-group', $student->id) }}">
+			<button class="btn fit-parent primary" style="margin-top: 10px;">Detach Group</button>
 		</a>
 		<a href="{{ url('confirm-student', $student->id) }}">
 			<button class="btn fit-parent negative" style="margin-top: 10px;">Delete Student</button>

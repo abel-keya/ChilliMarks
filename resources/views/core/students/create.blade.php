@@ -44,19 +44,19 @@
 
 	@if($school->school_type=='kenyan_secondary')
 	<div class="padded-full">
+		<h5 class="pull-right">KCPE Position</h5>
+	</div>
+	<div class="padded-full">
+		<input type="text" name="kcpe_position" value="{{ old('kcpe_position') }}" autocomplete="off" placeholder="Enter KCPE Position">
+	</div>
+	<div class="padded-full">
 		<h5 class="pull-right">KCPE Marks</h5>
 	</div>
 	<div class="padded-full">
 		<input type="text" name="kcpe_marks" value="{{ old('kcpe_marks') }}" autocomplete="off" placeholder="Enter KCPE Marks">
 	</div>
-	<div class="padded-full">
-		<h5 class="pull-right">KCPE Position</h5>
-	</div>
 	@endif
-	
-	<div class="padded-full">
-		<input type="text" name="kcpe_position" value="{{ old('kcpe_position') }}" autocomplete="off" placeholder="Enter KCPE Position">
-	</div>
+
 	<div class="padded-full">
 		<h5 class="pull-right">Year</h5>
 	</div>

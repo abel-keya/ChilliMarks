@@ -55,7 +55,7 @@ class TeachersController extends Controller
 
         $page                   = 'Teachers';
 
-        return view('core.teachers.index', compact('page', 'teachers'));
+        return view('core.teachers.index', compact('page', 'teachers')); 
     }
 
     public function view($id)

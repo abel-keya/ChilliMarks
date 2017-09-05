@@ -24,7 +24,7 @@
 	<form method="POST" action="{{ url('search-teachers') }}">
 		<div class="padded-full">
 			{{ csrf_field() }}
-			<input type="text" name="search" placeholder="Search Teachers" autocomplete="off" autofocus/>
+			<input type="text" name="search" placeholder="Search Teachers" autocomplete="off" autofocus required/>
 		</div>
 		<div class="padded-full">
 			<button type="submit" class="btn fit-parent primary">Search</button>
@@ -46,16 +46,14 @@
 			@foreach($teachers as $teacher)
 			<li>
 				<a class="padded-list" href="{{ url('view-teacher', $teacher->id) }}">
-					{{$teacher->name}},
-
-
+					{{$teacher->name}}
 					@foreach($teacher->subjects as $subject)
-						<strong>{{$subject->abbr}}</strong>:
+						<strong>: {{$subject->abbr}}</strong>:
 					@endforeach
 					
 
 					@foreach($teacher->streams as $stream)
-						{{$stream->abbr}} @if($teacher->streams->count()>1). @endif
+						{{$stream->abbr}}@if($teacher->streams->count()>1). @endif
 					@endforeach
 				</a>
 			</li>

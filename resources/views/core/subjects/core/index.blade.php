@@ -24,7 +24,7 @@
 <form method="POST" action="{{ url('search-subjects') }}">
 	<div class="padded-full">
 		{{ csrf_field() }}
-		<input type="text" name="search" placeholder="Search Subjects" autocomplete="off" autofocus/>
+		<input type="text" name="search" placeholder="Search Subjects" autocomplete="off" autofocus required/>
 	</div>
 	<div class="padded-full">
 		<button type="submit" class="btn fit-parent primary">Search</button>

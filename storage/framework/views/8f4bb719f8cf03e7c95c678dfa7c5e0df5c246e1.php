@@ -24,7 +24,7 @@
 	<div class="padded-full">
 		<?php echo e(csrf_field()); ?>
 
-		<input type="text" name="search" placeholder="Search Students" autocomplete="off" autofocus/>
+		<input type="text" name="search" placeholder="Search Students" autocomplete="off" autofocus required/>
 	</div>
 	<div class="padded-full">
 		<button type="submit" class="btn fit-parent primary">Search</button>
@@ -51,7 +51,7 @@
 					<?php $__currentLoopData = $student->streams; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $stream): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?> 
 						<strong><?php echo e($stream->abbr); ?>:</strong> 
 					<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-					<?php echo e($student->name); ?> <?php echo e($student->class); ?> Adm. <?php echo e($student->admission->adm_no); ?> <?php if(count($student->kcpe)>0): ?> <?php echo e($student->kcpe->marks); ?> <?php endif; ?>
+					<?php echo e($student->name); ?> <?php echo e($student->class); ?> <strong>Adm. <?php echo e($student->admission->adm_no); ?> </strong><?php if(count($student->kcpe)>0): ?> <?php echo e($student->kcpe->marks); ?> <?php endif; ?>
 				</a>
 
 			</li>
