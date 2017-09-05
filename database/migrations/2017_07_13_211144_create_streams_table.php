@@ -18,6 +18,8 @@ class CreateStreamsTable extends Migration
             $table->increments('id');
 
             $table->string('name')->index();
+            
+            $table->string('abbr')->index();
 
             $table->integer('class_id')->index();
 

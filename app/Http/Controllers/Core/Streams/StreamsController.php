@@ -1,11 +1,12 @@
 <?php
 
-namespace chilliapp\Http\Controllers\Core\Streams;
+namespace chillimarks\Http\Controllers\Core\Streams;
 
 use Illuminate\Http\Request;
-use chilliapp\Http\Controllers\Controller;
-use chilliapp\Models\Stream;
-use chilliapp\Models\Classes;
+use chillimarks\Http\Controllers\Controller;
+use chillimarks\Models\Stream;
+use chillimarks\Models\Classes;
+use chillimarks\Models\User;
 use Auth;
 
 class StreamsController extends Controller
@@ -31,14 +32,17 @@ class StreamsController extends Controller
     public function postcreate(Request $request, $id)
     {
     	$this->validate($request, [
-          'name'              => 'required|min:1'
+          'name'              => 'required|min:1',
+          'abbr'              => 'required|min:1'
         ]);
 
     	$name                 = $request->input('name');
+        $abbr                 = $request->input('abbr');
         $from_user            = Auth::user()->id;
         
     	$stream = Stream::create([
     		'name'            => $name,
+            'abbr'            => $abbr,
     		'class_id'        => $id,
             'from_user'       => $from_user
     	]);
@@ -62,20 +66,25 @@ class StreamsController extends Controller
     public function update(Request $request, $id)
     {
     	$this->validate($request, [
-          'name'              => 'required|min:1'
+          'name'              => 'required|min:1',
+          'abbr'              => 'required|min:1'
         ]);
 
         $name                 = $request->input('name');
+        $abbr                 = $request->input('abbr');
         $from_user            = Auth::user()->id;
 
-    	$stream = Stream::whereId($id)->update([
+    	$stream = Stream::whereId($id)->first();
+        
+        $stream->update([
     		'name'            => $name,
+            'abbr'            => $abbr,
             'from_user'       => $from_user
     	]);
 
     	$message = 'Stream updated successfully.';
 
-    	return redirect()->route('view-class', [$id])->with('success', $message);
+    	return redirect()->route('view-class', [$stream->class_id])->with('success', $message);
     }
 
     public function confirm ($id)
@@ -91,11 +100,27 @@ class StreamsController extends Controller
     {
     	$stream = Stream::whereId($id)->first();
 
+        $stream_name = $stream->name;
+
         $class_id = $stream->class_id;
+
+        $users = User::whereHas(
+            'streams', function($q) use($stream_name){
+                $q->where('name', $stream_name);
+            }
+        )->get();
+
+        foreach($users as $user)
+        {
+            if($user->hasStream($stream->name))
+            {
+                $user->removeStream($stream);
+            }
+        }
 
     	$stream->delete();
 
-    	$message = 'Stream deleted successfully.';
+    	$message = 'Stream deleted and detached from users successfully.';
 
         return redirect()->route('view-class', [$class_id])->with('success', $message);
     }

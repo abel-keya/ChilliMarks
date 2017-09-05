@@ -21,14 +21,14 @@
 @endsection
 
 @section('body')
-<form method="POST" action="{{ url('report-form') }}">
+<form method="POST" action="{{ url('primary-report-form') }}">
 	{{ csrf_field() }}
 	<div class="padded-full">
-		<select name="name">
-			<option disabled selected>Select an Exam</option>
-		    <option value='Opening Term'>Opening Term</option>
-		   	<option value='Mid Term'>Mid Term</option>
-		   	<option value='End Term'>End Term</option>
+		<select name="classesreport_id">
+			<option disabled selected>Select a Class Report</option>
+			@foreach($classesreports as $classesreport)
+		    	<option value='{{ $classesreport->id }}'>Opening Term</option>
+		    @endforeach
 		</select>
 	</div>
 	<div class="padded-full">
@@ -37,22 +37,6 @@
 		    @foreach($streams as $stream)
 		    	<option value='{{ $stream->id }}'>{{ $stream->name }}</option>
 		    @endforeach
-		</select>
-	</div>
-	<div class="padded-full">
-		<select name="period">
-			<option disabled selected>Select a Term</option>
-		    <option value='Term 1'>Term 1</option>
-		   	<option value='Term 2'>Term 2</option>
-		   	<option value='Term 3'>Term 3</option>
-		</select>
-	</div>	
-	<div class="padded-full">
-		<select name="year">
-			<option disabled>Select a Year</option>
-			@for($i=0; $i<=80; $i++) 
-		   		<option value='{{1970 + $i}}' @if( (1970 + $i)== date('Y') ) selected @endif>{{1970 + $i}}</option>
-		   	@endfor
 		</select>
 	</div>
 	<div class="padded-full">

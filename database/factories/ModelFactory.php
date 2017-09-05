@@ -12,7 +12,7 @@
 */
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(chilliapp\User::class, function (Faker\Generator $faker) {
+$factory->define(chillimarks\User::class, function (Faker\Generator $faker) {
     static $password;
 
     return [

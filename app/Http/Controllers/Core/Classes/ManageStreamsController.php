@@ -1,9 +1,9 @@
 <?php
 
-namespace chilliapp\Http\Controllers\Core\Classes;
+namespace chillimarks\Http\Controllers\Core\Classes;
 
 use Illuminate\Http\Request;
-use chilliapp\Http\Controllers\Controller;
+use chillimarks\Http\Controllers\Controller;
 
 class ManageStreamsController extends Controller
 {

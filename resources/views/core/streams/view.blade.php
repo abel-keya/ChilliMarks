@@ -24,6 +24,7 @@
     <div class="padded-full">
         <ul class="list">
             <li><strong>Stream Name:</strong> {{ $stream->name }}</li>
+            <li><strong>Stream Abbreviation:</strong> {{ $stream->abbr }}</li>
         </ul>
     </div>
     <div class="padded-full">

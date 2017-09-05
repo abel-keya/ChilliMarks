@@ -168,15 +168,18 @@ return [
          */
         Laravel\Tinker\TinkerServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
+        Cornford\Backup\Providers\BackupServiceProvider::class,
+        FreddieDfre\AfricasTalkingLaravel5\AfricasTalkingLaravel5ServiceProvider::class,
 
         /*
          * Application Service Providers...
          */
-        chilliapp\Providers\AppServiceProvider::class,
-        chilliapp\Providers\AuthServiceProvider::class,
-        // chilliapp\Providers\BroadcastServiceProvider::class,
-        chilliapp\Providers\EventServiceProvider::class,
-        chilliapp\Providers\RouteServiceProvider::class,
+        chillimarks\Providers\AppServiceProvider::class,
+        chillimarks\Providers\AuthServiceProvider::class,
+        // chillimarks\Providers\BroadcastServiceProvider::class,
+        chillimarks\Providers\EventServiceProvider::class,
+        chillimarks\Providers\RouteServiceProvider::class,
 
     ],
 
@@ -227,7 +230,9 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
-
+        'PDF' => Barryvdh\DomPDF\Facade::class,
+        'Backup' => Cornford\Backup\Facades\Backup::class,
+        'SMSProvider' => FreddieDfre\AfricasTalkingLaravel5\AfricasTalkingLaravel5Facade::class,
 
     ],
 

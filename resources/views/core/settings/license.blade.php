@@ -22,9 +22,9 @@
 
 @section('body')
 	<div class="padded-full text-justify">
-		<h5 style="padding-top: 25px;" class="text-center"><strong>Chilliapp - Terms and conditions</strong></h5>
+		<h5 style="padding-top: 25px;" class="text-center"><strong>ChilliMarks - Terms and conditions</strong></h5>
 		<p>
-			Preamble: This Agreement, signed on Jul 4, 2017 (hereinafter: Effective Date) governs the relationship between your institution, a Business Entity, (hereinafter: Licensee) and Chilli App, a duly registered business (hereinafter: Licensor). This Agreement sets the terms, rights, restrictions and obligations on using Chilliapp (hereinafter: The Software) created and owned by Licensor, as detailed herein.
+			Preamble: This Agreement, signed on Jul 4, 2017 (hereinafter: Effective Date) governs the relationship between your institution, a Business Entity, (hereinafter: Licensee) and Chilli Marks, a duly registered business (hereinafter: Licensor). This Agreement sets the terms, rights, restrictions and obligations on using ChilliMarks (hereinafter: The Software) created and owned by Licensor, as detailed herein.
 		</p>
 		<p>
 			License Grant: Licensor hereby grants Licensee a Personal, Non-assignable & non-transferable, Pepetual, Commercial, Royalty free, Without the rights to create derivative works, Non-exclusive license, all with accordance with the terms set forth and other legal restrictions set forth in 3rd party software used while running Software.

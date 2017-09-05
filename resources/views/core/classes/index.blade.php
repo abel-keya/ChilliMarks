@@ -24,7 +24,7 @@
 <form method="POST" action="{{ url('search-classes') }}">
 	<div class="padded-full">
 		{{ csrf_field() }}
-		<input type="text" name="search" placeholder="Search classes here..." autocomplete="off" autofocus/>
+		<input type="text" name="search" placeholder="Search Classes" autocomplete="off" autofocus/>
 	</div>
 	<div class="padded-full">
 		<button type="submit" class="btn fit-parent primary">Search</button>
@@ -42,7 +42,7 @@
 </div>
 <div class="padded-full">
 	<ul class="list">
-		@foreach($classes as $class)
+		@foreach($classes->reverse() as $class)
 		<li>
 			<a class="padded-list" href="{{ url('view-class', $class->id) }}">{{$class->name}}, {{$class->year}}</a>
 		</li>

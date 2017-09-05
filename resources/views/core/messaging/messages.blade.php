@@ -21,18 +21,28 @@
 @endsection
 
 @section('body')
-<form method="POST" action="{{ url('search-messages') }}">
+<form method="POST" action="{{ url('search-notifications') }}">
 	<div class="padded-full">
 		{{ csrf_field() }}
-		<input type="text" name="search" placeholder="Search messaged exams here..." autocomplete="off" autofocus/>
+		<input type="text" name="search" placeholder="Search Notifications" autocomplete="off" autofocus/>
 	</div>
 	<div class="padded-full">
-		<button type="submit" class="btn fit-parent primary">Search Messages</button>
+		<button type="submit" class="btn fit-parent primary">Search Notifications</button>
 	</div>
 </form>
 <div class="padded-full">
+	<a href="{{ url('notify-stream') }}">
+		<button class="btn fit-parent primary">Notify by Stream</button>
+	</a>
+</div>
+<div class="padded-full">
+	<a href="{{ url('notify-class') }}">
+		<button class="btn fit-parent primary">Notify by Class</button>
+	</a>
+</div>
+<div class="padded-full">
 	<ul class="list" style="padding: 20px 0px 20px 0px;">
-		<li class="divider text-center"><p>All Exams</p></li>
+		<li class="divider text-center"><p>All Notifications</p></li>
 	</ul>
 </div>
 

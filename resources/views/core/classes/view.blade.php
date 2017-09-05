@@ -29,7 +29,7 @@
     </div>
     @if($streams->count()>0)
     <div class="padded-full">
-        <ul class="list" style="padding: 20px 0px 20px 0px;">
+        <ul class="list">
             <li class="divider text-center"><p>Streams</p></li>
         </ul>
     </div>

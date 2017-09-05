@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use chilliapp\Models\Role;
+use chillimarks\Models\Role;
 
 class RolesSeeder extends Seeder
 {

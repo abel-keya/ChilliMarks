@@ -1,10 +1,11 @@
 <?php
 
-namespace chilliapp\Http\Controllers\Core\Groups;
+namespace chillimarks\Http\Controllers\Core\Groups;
 
 use Illuminate\Http\Request;
-use chilliapp\Http\Controllers\Controller;
-use chilliapp\Models\Group;
+use chillimarks\Http\Controllers\Controller;
+use chillimarks\Models\Group;
+use chillimarks\Models\User;
 use Auth;
 
 class GroupsController extends Controller
@@ -134,6 +135,22 @@ class GroupsController extends Controller
     public function delete($id)
     {
     	$group = Group::whereId($id)->first();
+
+        $group_name = $group->name;
+
+        $users = User::whereHas(
+            'groups', function($q) use($group_name){
+                $q->where('name', $group_name);
+            }
+        )->get();
+
+        foreach($users as $user)
+        {
+            if($user->hasGroup($group->name))
+            {
+                $user->removeGroup($group);
+            }
+        }
 
     	$group->delete();
 

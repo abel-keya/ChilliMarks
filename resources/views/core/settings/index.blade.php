@@ -31,8 +31,19 @@
 	    <a href="{{ url('groups-settings') }}">
 	        <button class="btn fit-parent primary" style="margin-top: 10px;">Groups Settings</button>
 	    </a>
+	    <a href="{{ url('subjects') }}">
+	        <button class="btn fit-parent primary" style="margin-top: 10px;">Subject Settings</button>
+	    </a>
+	    @if($school->school_type=='kenyan_secondary')
+		    <a href="{{ url('classifications') }}">
+		        <button class="btn fit-parent primary" style="margin-top: 10px;">Classifications</button>
+		    </a>
+	    @endif
+	    <a href="{{ url('backup-settings') }}">
+	        <button class="btn fit-parent primary" style="margin-top: 10px;">Backup Settings</button>
+	    </a>
 	    <a href="{{ url('about') }}">
-	        <button class="btn fit-parent primary" style="margin-top: 10px;">About ChilliApp</button>
+	        <button class="btn fit-parent primary" style="margin-top: 10px;">About ChilliMarks</button>
 	    </a>
 	</div>
 @endsection

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use chilliapp\Models\School;
+use chillimarks\Models\School;
 
 class SchoolSeeder extends Seeder
 {
@@ -15,7 +15,7 @@ class SchoolSeeder extends Seeder
         DB::table('school')->delete(); 
 
         School::create([
-            'name'      => 'ChilliApp School',
+            'name'      => 'ChilliMarks School',
             'address'   => 'P.O. Box 12345 - 00100, Nairobi, Kenya.',
             'phone'     => '+254 703 333 231',
             'from_user' => 1

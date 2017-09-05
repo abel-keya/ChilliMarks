@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use chilliapp\Models\Role;
-use chilliapp\Models\User;
-use chilliapp\Models\Admission;
+use chillimarks\Models\Role;
+use chillimarks\Models\User;
+use chillimarks\Models\Admission;
 
 class UsersSeeder extends Seeder
 {

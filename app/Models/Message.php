@@ -1,6 +1,6 @@
 <?php
 
-namespace chilliapp\Models;
+namespace chillimarks\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

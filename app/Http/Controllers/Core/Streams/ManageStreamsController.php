@@ -1,12 +1,12 @@
 <?php
 
-namespace chilliapp\Http\Controllers\Core\Streams;
+namespace chillimarks\Http\Controllers\Core\Streams;
 
 use Illuminate\Http\Request;
-use chilliapp\Http\Controllers\Controller;
-use chilliapp\Models\Stream;
-use chilliapp\Models\User;
-use chilliapp\Models\Group;
+use chillimarks\Http\Controllers\Controller;
+use chillimarks\Models\Stream;
+use chillimarks\Models\User;
+use chillimarks\Models\Group;
 
 class ManageStreamsController extends Controller
 {   

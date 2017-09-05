@@ -1,13 +1,13 @@
 <?php
 
-namespace chilliapp\Http\Controllers\Core\Exams;
+namespace chillimarks\Http\Controllers\Core\Exams;
 
 use Illuminate\Http\Request;
-use chilliapp\Http\Controllers\Controller;
-use chilliapp\Models\Grade;
-use chilliapp\Models\Exam;
-use chilliapp\Models\Assessment;
-use chilliapp\Models\User;
+use chillimarks\Http\Controllers\Controller;
+use chillimarks\Models\Grade;
+use chillimarks\Models\Exam;
+use chillimarks\Models\Assessment;
+use chillimarks\Models\User;
 use Auth;
 
 class GradesController extends Controller
@@ -27,22 +27,26 @@ class GradesController extends Controller
     {
     	$page = 'Submit Grades';
 
-    	$grades = Grade::whereExamId($id)->get();
+    	$grades = Grade::whereAssessmentId($id)->get();
 
-    	$exam = Exam::whereId($id)->first();
+    	$assessment = Assessment::whereId($id)->first();
 
-    	return view('teachers.exams.grades', compact('page', 'grades', 'exam'));
+    	return view('teachers.exams.grades', compact('page', 'grades', 'assessment'));
     }		
 
     public function postgrades(Request $request, $id)
     {	
-    	$this->validate($request, [
-          'grades.*'              => 'required|numeric|max:100|min:0'
+        $assessment = Assessment::whereId($id)->first();
+
+        $out_of = $assessment->out_of;
+
+        $this->validate($request, [
+          'grades.*'              => 'required|numeric|max:'.$out_of.'|min:0'
         ]);
 
-    	$grades       = Grade::where('exam_id', $id)->get();
+    	$grades       = Grade::where('assessment_id', $id)->get();
 
-        $grades_1st   = Grade::where('exam_id', $id)->first();
+        $grades_1st   = Grade::where('assessment_id', $id)->first();
 
         $grades_1st   = $grades_1st->id;
 
@@ -52,10 +56,10 @@ class GradesController extends Controller
 
             $grade    = Grade::whereId($grades_1st+$i);
 
-            $grade->update(['grade' => $request->grades[$i], 'status' => 1]);            
+            $grade->update(['marks' => $request->grades[$i], 'status' => 1]);            
         }
 
-        $exam = Exam::whereId($id)->update(['status' => 1]);
+        $assessment = Assessment::whereId($id)->update(['status' => 1]);
 
         return redirect()->back()->with('success', 'Grades updated successfully.');
     }

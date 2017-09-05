@@ -1,11 +1,11 @@
 <?php
 
-namespace chilliapp\Http\Controllers\Core\Teachers;
+namespace chillimarks\Http\Controllers\Core\Teachers;
 
 use Illuminate\Http\Request;
-use chilliapp\Http\Controllers\Controller;
-use chilliapp\Models\User;
-use chilliapp\Models\Role;
+use chillimarks\Http\Controllers\Controller;
+use chillimarks\Models\User;
+use chillimarks\Models\Role;
 use Auth;
 
 class TeachersController extends Controller
@@ -18,7 +18,7 @@ class TeachersController extends Controller
             'roles', function($q){
                 $q->where('name', 'teacher');
             }
-        )->get();
+        )->latest()->limit(100)->get();
 
     	return view('core.teachers.index', compact('page', 'teachers'));
     }

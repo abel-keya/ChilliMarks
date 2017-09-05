@@ -25,8 +25,8 @@
 		<a href="{{ url('academic-messaging') }}">
 	        <button class="btn fit-parent primary" style="margin-top: 10px;">Send Academic SMS</button>
 	    </a>
-	    <a href="{{ url('past-messages') }}">
-	        <button class="btn fit-parent primary" style="margin-top: 10px;">Past Messages</button>
+	    <a href="{{ url('notifications') }}">
+	        <button class="btn fit-parent primary" style="margin-top: 10px;">Notification Messages</button>
 	    </a>
 	</div>
 @endsection

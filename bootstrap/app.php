@@ -28,17 +28,17 @@ $app = new Illuminate\Foundation\Application(
 
 $app->singleton(
     Illuminate\Contracts\Http\Kernel::class,
-    chilliapp\Http\Kernel::class
+    chillimarks\Http\Kernel::class
 );
 
 $app->singleton(
     Illuminate\Contracts\Console\Kernel::class,
-    chilliapp\Console\Kernel::class
+    chillimarks\Console\Kernel::class
 );
 
 $app->singleton(
     Illuminate\Contracts\Debug\ExceptionHandler::class,
-    chilliapp\Exceptions\Handler::class
+    chillimarks\Exceptions\Handler::class
 );
 
 /*

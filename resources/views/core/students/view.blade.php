@@ -27,6 +27,12 @@
 			<li><strong>Student Name:</strong> {{ $student->name }}</li>
 			<li><strong>Phone:</strong> {{ $student->phone }}</li>
 			<li><strong>Year:</strong> {{ $student->year }}</li>
+
+			@if($school->school_type=='kenyan_secondary' && $student->kcpe)
+			<li><strong>KCPE Position:</strong> {{ $student->kcpe->position }}</li>
+			<li><strong>KCPE Marks:</strong> {{ $student->kcpe->marks }}</li>
+			@endif
+			
 			@if($student->streams->count()>0)
 			<li>
 				<strong>Streams:</strong> 
@@ -35,6 +41,7 @@
                 @endforeach 
 			</li>
 			@endif
+
 
 			@if($student->groups->count()>0)
 			<li>

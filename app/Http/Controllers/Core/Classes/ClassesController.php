@@ -1,12 +1,13 @@
 <?php
 
-namespace chilliapp\Http\Controllers\Core\Classes;
+namespace chillimarks\Http\Controllers\Core\Classes;
 
 use Illuminate\Http\Request;
-use chilliapp\Http\Controllers\Controller;
-use chilliapp\Models\Classes;
-use chilliapp\Models\Stream;
+use chillimarks\Http\Controllers\Controller;
+use chillimarks\Models\Classes;
+use chillimarks\Models\Stream;
 use Auth;
+use DB;
 
 class ClassesController extends Controller
 {   
@@ -137,9 +138,16 @@ class ClassesController extends Controller
     {
     	$class = Classes::whereId($id)->first();
 
+        $streams = Stream::whereClassId($class->id)->get();
+
+        foreach($streams as $stream)
+        {
+            DB::table('stream_user')->where('stream_id', $stream->id)->delete();
+        }
+
+        Stream::whereClassId($class->id)->delete();
+
         $class->delete();
-        
-        $streams = Stream::whereId($id)->delete();
 
     	$message = 'Class deleted successfully.';
 

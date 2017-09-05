@@ -24,26 +24,16 @@
 <form method="POST" action="{{ url('create-exam') }}">
 	{{ csrf_field() }}
 	<div class="padded-full">
-		<select name="name">
-			<option disabled selected>Select an Exam</option>
-		    <option value='Opening Term'>Opening Term</option>
-		   	<option value='Mid Term'>Mid Term</option>
-		   	<option value='End Term'>End Term</option>
-		</select>
+	    <h5 class="pull-right">Exam Name</h5>
+	</div>
+	<div class="padded-full">
+		<input type="text" name="name" value="{{ old('name') }}" autocomplete="off" placeholder="Enter Exam Name" autofocus>
 	</div>
 	<div class="padded-full">
 		<select name="subject_id">
 			<option disabled selected>Select a Subject</option>
 			@foreach($subjects as $subject)
 		    	<option value='{{ $subject->id }}'>{{$subject->name}}</option>
-		    @endforeach
-		</select>
-	</div>
-	<div class="padded-full">
-		<select name="teacher_id">
-			<option disabled selected>Select a Teacher</option>
-		    @foreach($teachers as $teacher)
-		    	<option value='{{ $teacher->id }}'>{{ $teacher->name }}</option>
 		    @endforeach
 		</select>
 	</div>

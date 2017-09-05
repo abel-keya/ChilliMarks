@@ -43,23 +43,38 @@
 			@endforeach 
 		</li>
 		@endif
+
+		@if($teacher->subjects->count()>0)
+		<li>
+			<strong>Subjects:</strong> 
+			@foreach($teacher->subjects as $subject)
+			{{$subject->name}}@if($teacher->subjects->count()>1). @endif
+			@endforeach 
+		</li>
+		@endif
 	</ul>
 </div>
 <div class="padded-full">
 	<a href="{{ url('edit-teacher', $teacher->id) }}">
 		<button class="btn fit-parent primary">Edit Teacher</button>
 	</a>
-	<a href="{{ url('select-attach-group', $teacher->id) }}">
-		<button class="btn fit-parent primary" style="margin-top: 10px;">Assign Group</button>
-	</a>
-	<a href="{{ url('select-detach-group', $teacher->id) }}">
-		<button class="btn fit-parent primary" style="margin-top: 10px;">Detach Group</button>
-	</a>
 	<a href="{{ url('select-attach-stream', $teacher->id) }}">
 		<button class="btn fit-parent primary" style="margin-top: 10px;">Assign Stream</button>
 	</a>
 	<a href="{{ url('select-detach-stream', $teacher->id) }}">
 		<button class="btn fit-parent primary" style="margin-top: 10px;">Detach Stream</button>
+	</a>
+	<a href="{{ url('assign-subject-teacher', $teacher->id) }}">
+		<button class="btn fit-parent primary" style="margin-top: 10px;">Assign Subject</button>
+	</a>
+	<a href="{{ url('detach-subject-teacher', $teacher->id) }}">
+		<button class="btn fit-parent primary" style="margin-top: 10px;">Detach Subject</button>
+	</a>
+	<a href="{{ url('select-attach-group', $teacher->id) }}">
+		<button class="btn fit-parent primary" style="margin-top: 10px;">Assign Group</button>
+	</a>
+	<a href="{{ url('select-detach-group', $teacher->id) }}">
+		<button class="btn fit-parent primary" style="margin-top: 10px;">Detach Group</button>
 	</a>
 	<a href="{{ url('confirm-teacher', $teacher->id) }}">
 		<button class="btn fit-parent negative" style="margin-top: 10px;">Delete Teacher</button>

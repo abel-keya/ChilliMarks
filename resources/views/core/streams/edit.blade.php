@@ -30,6 +30,12 @@
 		<input type="text" name="name" value="{{ $stream->name }}" autocomplete="off" placeholder="Enter Stream Name" autofocus>
 	</div>
 	<div class="padded-full">
+	    <h5 class="pull-right">Stream Abbreviation</h5>
+	</div>
+	<div class="padded-full">
+		<input type="text" name="abbr" value="{{ $stream->abbr }}" autocomplete="off" placeholder="Enter Stream Abbreviation" autofocus>
+	</div>
+	<div class="padded-full">
 		<button type="submit" class="btn fit-parent primary">Save Edit</button>
 	</div>
 </form>

@@ -1,6 +1,6 @@
 <?php
 
-namespace chilliapp\Providers;
+namespace chillimarks\Providers;
 
 use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -13,8 +13,8 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'chilliapp\Events\Event' => [
-            'chilliapp\Listeners\EventListener',
+        'chillimarks\Events\Event' => [
+            'chillimarks\Listeners\EventListener',
         ],
     ];
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace chilliapp\Console;
+namespace chillimarks\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;

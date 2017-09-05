@@ -1,9 +1,10 @@
 <?php
 
-namespace chilliapp\Http\Controllers\Core\Settings;
+namespace chillimarks\Http\Controllers\Core\Settings;
 
 use Illuminate\Http\Request;
-use chilliapp\Http\Controllers\Controller;
+use chillimarks\Http\Controllers\Controller;
+use chillimarks\Models\School;
 
 class SettingsController extends Controller
 {  
@@ -11,12 +12,14 @@ class SettingsController extends Controller
     {	
         $page = 'Settings';
 
-    	return view('core.settings.index', compact('page'));
+        $school = School::first();
+
+    	return view('core.settings.index', compact('page', 'school'));
     }
 
     public function about()
     {	
-        $page = 'About ChilliApp';
+        $page = 'About ChilliMarks';
 
         $year = date("Y");
 
@@ -25,7 +28,7 @@ class SettingsController extends Controller
 
     public function license()
     {	
-        $page = 'ChilliApp License';
+        $page = 'ChilliMarks License';
 
     	return view('core.settings.license', compact('page'));
     }

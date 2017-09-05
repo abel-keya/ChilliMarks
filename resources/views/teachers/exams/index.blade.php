@@ -23,20 +23,20 @@
 @section('body')
     <div class="padded-full">
 		<ul class="list">
-			@if(count($exams)>0)
-				@foreach($exams->reverse() as $exam)
+			@if(count($assessments)>0)
+				@foreach($assessments->reverse() as $assessment)
 					<li>
-						<a href="{{ url('view-teacher-grades', $exam->id) }}">{{ $exam->subject->name }} {{ $exam->stream->classes->name }} 
-							@if($exam->status==1) 
-								<span style="color:green;"> &#10003; submitted</span> 
+						<a href="{{ url('view-teacher-grades', $assessment->id) }}">{{ $assessment->name }}, {{ $assessment->exam->subject->name }} {{ $assessment->exam->stream->classes->name }} 
+							@if($assessment->status==1) 
+								<span style="color:green;"> &#10003; Submitted</span> 
 							@else 
-								<span style="color:blue;">&#x2715; pending</span> 
+								<span style="color:blue;">&#x2715; Pending</span> 
 							@endif
 						</a>
 					</li>
 				@endforeach
 			@else
-				<li class="text-center">You don't have any exams.</li>
+				<li class="text-center">You don't have any assessments.</li>
 			@endif
 		</ul>
 	</div>

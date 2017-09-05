@@ -6,7 +6,7 @@
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
         <link rel="icon" href="{{ asset('chealth.ico') }}" type="image/x-icon" />
 
-        <title>ChilliApp - Using Data Science to foster learners' academic growth</title>
+        <title>ChilliMarks - Using Data Science to foster learners' academic growth</title>
 
         <link rel="stylesheet" href="{{ asset('css/phonon.css') }}" />
         <link rel="stylesheet" href="{{ asset('css/components/side-panels.css') }}">
@@ -26,7 +26,7 @@
             <header class="header-bar">
                 <button class="btn pull-right icon icon-close show-for-phone-only" data-side-panel-close="true"></button>
                 <div class="pull-left">
-                    <h4 class="title">ChilliApp Menu</h4>
+                    <h4 class="title">ChilliMarks Menu</h4>
                 </div>
             </header>
             <div class="content">
@@ -40,7 +40,7 @@
                         <li><a class="padded-list" href="{{ url('settings') }}">Settings</a></li>      
                     @endif
                     @if(Auth::user()->hasRole('teacher'))
-                        <li><a class="padded-list" href="">My Exams</a></li>    
+                        <li><a class="padded-list" href="{{ url('teacher-assessments') }}">My Assessments</a></li>    
                     @endif
                     <li><a class="padded-list" href="{{ url('signout') }}">Sign Out</a></li>
                 </ul>

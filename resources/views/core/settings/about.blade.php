@@ -23,10 +23,10 @@
 @section('body')
 	<div class="padded-full">
 		<div class="padded-full text-center">
-			<h5 style="padding-top: 25px;"><strong>Chilliapp Version: {{\Tremby\LaravelGitVersion\GitVersionHelper::getVersion() }}:</strong></h5>
-			<p>Copyright © {{ $year }}. Chilli App</p>
-			<p>Website: <a href="http://www.chilliapp.io" target="_blank">www.chilliapp.com</a></p>
-			<p>ChilliApp is released under the ChilliApp license which can be found <a href="{{ url('license') }}">here</a>.</p>
+			<h5 style="padding-top: 25px;"><strong>ChilliMarks Version: {{\Tremby\LaravelGitVersion\GitVersionHelper::getVersion() }}:</strong></h5>
+			<p>Copyright © {{ $year }}. Chilli Marks</p>
+			<p>Website: <a href="http://www.chillimarks.io" target="_blank">www.chillimarks.com</a></p>
+			<p>ChilliMarks is released under the ChilliMarks license which can be found <a href="{{ url('license') }}">here</a>.</p>
 		</div>
 	</div>
 @endsection

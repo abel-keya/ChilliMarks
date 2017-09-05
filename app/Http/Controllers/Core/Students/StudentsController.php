@@ -1,14 +1,16 @@
 <?php
 
-namespace chilliapp\Http\Controllers\Core\Students;
+namespace chillimarks\Http\Controllers\Core\Students;
 
 use Illuminate\Http\Request;
-use chilliapp\Http\Controllers\Controller;
-use chilliapp\Models\User;
-use chilliapp\Models\Role;
-use chilliapp\Models\Admission;
-use chilliapp\Models\Group;
-use chilliapp\Models\Stream;
+use chillimarks\Http\Controllers\Controller;
+use chillimarks\Models\User;
+use chillimarks\Models\Role;
+use chillimarks\Models\Admission;
+use chillimarks\Models\Group;
+use chillimarks\Models\Stream;
+use chillimarks\Models\School;
+use chillimarks\Models\Kcpe;
 use Auth;
 use Excel;
 use Illuminate\Support\Facades\Input;
@@ -25,7 +27,7 @@ class StudentsController extends Controller
             'roles', function($q){
                 $q->where('name', 'student');
             }
-        )->get();
+        )->latest()->limit(100)->get();
 
     	return view('core.students.index', compact('page', 'students'));
     }
@@ -74,14 +76,18 @@ class StudentsController extends Controller
 
     	$student = User::whereId($id)->first();
 
-    	return view('core.students.view', compact('page', 'student'));
+        $school  = School::first();
+
+    	return view('core.students.view', compact('page', 'student', 'school'));
     }
 
     public function create()
     {
         $page = 'Create Student';
 
-        return view('core.students.create', compact('page'));
+        $school = School::first();
+
+        return view('core.students.create', compact('page', 'school'));
     }
 
     public function postcreate(Request $request)
@@ -95,9 +101,9 @@ class StudentsController extends Controller
 
         $adm_no               = $request->input('adm_no');
         $name                 = $request->input('name');
+        $phone                = $request->input('phone');
         $year                 = $request->input('year');
         $password             = 'password';
-        $phone                = $request->input('phone');
         $from_user            = Auth::user()->id;
 
         $student = User::create([
@@ -132,7 +138,28 @@ class StudentsController extends Controller
                 'password'       => bcrypt($password),
                 'from_user'      => $from_user
             ]);
-        } 
+        }
+
+        $school = School::where('school_type', 'kenyan_secondary')->first();
+
+        if($school)
+        {   
+            $this->validate($request, [
+              'kcpe_marks'           => 'required|min:1',
+              'kcpe_position'        => 'required|min:1',
+            ]);
+
+            $kcpe_marks              = $request->input('kcpe_marks');
+            $kcpe_position           = $request->input('kcpe_position');
+
+            Kcpe::create([
+                'student_id'     => $student->id,
+                'marks'          => $kcpe_marks,
+                'position'       => $kcpe_position,
+                'from_user'      => $from_user
+            ]);
+            
+        }
 
     	$message = 'Student created successfully.';
 
@@ -145,7 +172,9 @@ class StudentsController extends Controller
 
     	$student = User::whereId($id)->first();
 
-    	return view('core.students.edit', compact('page', 'student'));
+        $school = School::where('school_type', 'kenyan_secondary')->first();
+
+    	return view('core.students.edit', compact('page', 'student', 'school'));
     }
 
     public function update(Request $request, $id)
@@ -184,7 +213,30 @@ class StudentsController extends Controller
                 'password'        => bcrypt($password),
                 'from_user'       => $from_user
             ]);
-        } 
+        }
+
+        $school = School::where('school_type', 'kenyan_secondary')->first();
+
+        if($school)
+        {   
+            $this->validate($request, [
+              'kcpe_marks'           => 'required|min:1',
+              'kcpe_position'        => 'required|min:1',
+            ]);
+
+            $kcpe_marks              = $request->input('kcpe_marks');
+            $kcpe_position           = $request->input('kcpe_position');
+
+            $kcpe = Kcpe::whereStudentId($id)->first();
+
+            $kcpe->update([
+                'marks'          => $kcpe_marks,
+                'position'       => $kcpe_position,
+                'from_user'      => $from_user
+            ]);
+            
+        }
+
 
     	$message = 'Student updated successfully.';
 
@@ -206,6 +258,8 @@ class StudentsController extends Controller
 
         $admission = Admission::whereUserId($student->id)->delete();
 
+        $admission = Kcpe::whereStudentId($student->id)->delete();
+
     	$student->delete();
 
     	$message = 'Student deleted successfully.';
@@ -222,7 +276,7 @@ class StudentsController extends Controller
 
     public function importtemplate()
     {
-        Excel::create('ChilliApp Student Import Template', function($excel){
+        Excel::create('ChilliMarks Student Import Template', function($excel){
 
             $excel->sheet('sheet1', function($sheet){
 

@@ -19,6 +19,10 @@ class CreateSubjectsTable extends Migration
 
             $table->string('name')->index();
 
+            $table->string('abbr')->index();
+
+            $table->string('code')->index();
+
             $table->integer('from_user')->unsigned()->index();
 
             $table->foreign('from_user')->references('id')->on('users')->onDelete('cascade');

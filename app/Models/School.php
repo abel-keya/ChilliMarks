@@ -1,19 +1,17 @@
 <?php
 
-namespace chilliapp\Models;
+namespace chillimarks\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 class School extends Model
 {	
-	protected $table = 'school';
-
     protected $fillable = [
-        'name', 'address', 'phone', 'from_user'
+        'name', 'address', 'phone', 'school_type', 'from_user'
     ];
 
     public function fromUser()
     {
-    	return $this->belongsTo('chilliapp\Models\User','from_user');
+    	return $this->belongsTo('chillimarks\Models\User','from_user');
   	}
 }

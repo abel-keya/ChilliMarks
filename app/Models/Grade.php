@@ -1,6 +1,6 @@
 <?php
 
-namespace chilliapp\Models;
+namespace chillimarks\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,16 +10,17 @@ class Grade extends Model
 
     public function assessment()
     {
-    	return $this->belongsTo('chilliapp\Models\Assessment');
+    	return $this->belongsTo('chillimarks\Models\Assessment');
   	}
-
+    
   	public function student()
     {
-    	return $this->belongsTo('chilliapp\Models\User','student_id');
+    	return $this->belongsTo('chillimarks\Models\User','student_id');
   	}
 
-	public function fromUser()
+	  public function fromUser()
     {
-    	return $this->belongsTo('chilliapp\Models\User','from_user');
+    	return $this->belongsTo('chillimarks\Models\User','from_user');
   	}
+
 }

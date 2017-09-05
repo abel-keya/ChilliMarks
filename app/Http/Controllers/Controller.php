@@ -1,6 +1,6 @@
 <?php
 
-namespace chilliapp\Http\Controllers;
+namespace chillimarks\Http\Controllers;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;

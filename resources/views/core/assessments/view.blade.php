@@ -25,7 +25,7 @@
     <ul class="list">
         <li><strong>Assessment:</strong> {{ $assessment->exam->name}}, {{ $assessment->name }}</li>
         <li><strong>Subject:</strong> {{ $assessment->exam->subject->name }}</li>
-        <li><strong>Teacher:</strong> {{ $assessment->exam->teacher->name }}</li>
+        <li><strong>Teacher:</strong> {{ $assessment->teacher->name }}</li>
         <li><strong>Period:</strong> {{ $assessment->exam->period }}, {{ $assessment->exam->year }}</li>
         <li><strong>Out of:</strong> {{ $assessment->out_of }} marks</li>
         <li><strong>Contribution:</strong> {{ $assessment->contribution }} %</li>
@@ -46,7 +46,7 @@
                     @if($grade->status==0)
                         <span style="color:green;">Pending</span>
                     @else
-                        {{ number_format((float)$grade->marks, 0, '.', '') }}
+                        {{ number_format((float)$grade->marks, 0, '.', '') }} marks
                     @endif
                     <a href="{{ url('confirm-grade', $grade->id) }}" class="btn pull-right icon icon-close" style="margin:3px 3px 3px 3px;" title="Delete Grade"></a>
                     <a href="{{ url('edit-grade', $grade->id) }}" class="btn pull-right icon icon-edit" style="margin:3px 3px 3px 3px;" title="Edit Grade"></a>
@@ -58,9 +58,6 @@
 <div class="padded-full">
     <a href="{{ url('create-select-grades', $assessment->id) }}">
         <button class="btn fit-parent primary">Create Grade</button>
-    </a>
-    <a href="{{ url('view-grades', $assessment->id) }}">
-        <button class="btn fit-parent primary" style="margin-top: 10px;">View Grades</button>
     </a>
     <a href="{{ url('edit-assessment', $assessment->id) }}">
         <button class="btn fit-parent primary" style="margin-top: 10px;">Edit Assessment</button>

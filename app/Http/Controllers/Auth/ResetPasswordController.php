@@ -1,8 +1,8 @@
 <?php
 
-namespace chilliapp\Http\Controllers\Auth;
+namespace chillimarks\Http\Controllers\Auth;
 
-use chilliapp\Http\Controllers\Controller;
+use chillimarks\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
 class ResetPasswordController extends Controller

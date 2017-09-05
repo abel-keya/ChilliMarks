@@ -35,6 +35,22 @@
 	<div class="padded-full">
 		<input type="text" name="phone" value="{{ $student->phone }}" autocomplete="off" placeholder="Enter Phone No.">
 	</div>
+
+	@if($school)
+	<div class="padded-full">
+		<h5 class="pull-right">KCPE Position</h5>
+	</div>
+	<div class="padded-full">
+		<input type="text" name="kcpe_position" value="" autocomplete="off" placeholder="Enter KCPE Position">
+	</div>
+	<div class="padded-full">
+		<h5 class="pull-right">KCPE Marks</h5>
+	</div>
+	<div class="padded-full">
+		<input type="text" name="kcpe_marks" value="" autocomplete="off" placeholder="Enter KCPE Marks">
+	</div>
+	@endif
+
 	<div class="padded-full">
 		<h5 class="pull-right">Year</h5>
 	</div>
@@ -71,7 +87,7 @@
 		<input type="password" name="password_confirm" autocomplete="off">
 	</div>
 	<div class="padded-full">
-		<button type="submit" class="btn fit-parent primary">Edit Student</button>
+		<button type="submit" class="btn fit-parent primary">Update Student</button>
 	</div>
 </form>
 <div class="padded-full">

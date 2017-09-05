@@ -24,28 +24,27 @@
 <form method="POST" action="{{ url('send-messages') }}">
 	{{ csrf_field() }}
 	<div class="padded-full">
-		<h5 class="pull-right">Choose Class</h5>
-	</div>
-	<div class="padded-full">
-		<select name="class_id">
-			<option disabled selected>Select a Class</option>
-			@foreach($classes as $class)
-		    	<option value='{{ $class->id }}'>{{$class->name}} {{$class->year}}</option>
+		<select name="classesreport_id">
+			<option disabled selected>Select a Class Report</option>
+			@foreach($classes_reports as $classes_report)
+		    	<option value='{{ $classes_report->id }}'>Opening Term</option>
 		    @endforeach
 		</select>
 	</div>
 	<div class="padded-full">
-		<select name="term">
-			<option disabled selected>Select a Term</option>
-		    <option value='1'>Term 1</option>
+		<select name="stream_id">
+			<option disabled selected>Select a Stream</option>
+		    @foreach($streams as $stream)
+		    	<option value='{{ $stream->id }}'>{{ $stream->name }}</option>
+		    @endforeach
 		</select>
 	</div>
 	<div class="padded-full">
-		<button type="submit" class="btn fit-parent primary">Send Academic SMS</button>
+		<button type="submit" class="btn fit-parent primary">Send Academic Messages</button>
 	</div>
 </form>
 <div class="padded-full">
-	<a href="{{ url('exams') }}">
+	<a href="">
 		<button class="btn fit-parent">Go Back</button>
 	</a>
 </div>

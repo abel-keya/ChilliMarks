@@ -24,11 +24,26 @@
 <form method="POST" action="{{ url('create-assessment', $id) }}">
 	{{ csrf_field() }}
 	<div class="padded-full">
-		<h5 class="pull-right">Assessment Name</h5>
+		<h5 class="pull-right">Assessment</h5>
 	</div>
 	<div class="padded-full">
-		<input type="text" name="assessment_name" value="{{ old('assessment_name') }}" autocomplete="off" placeholder="Enter Assessment Name" autofocus>
+		<select name="assessment_name">
+			<option disabled selected>Select an Assessment</option>
+		    @foreach($codes as $code)
+		    	<option value='{{ $code }}'>{{ $code }}</option>
+		    @endforeach
+		</select>
 	</div>
+	<div class="padded-full">
+		<select name="teacher_id">
+			<option disabled selected>Select a Teacher</option>
+		    @foreach($teachers as $teacher)
+		    	<option value='{{ $teacher->id }}'>{{ $teacher->name }}</option>
+		    @endforeach
+		</select>
+	</div>
+
+	@if($school->school_type=='kenyan_secondary') 
 	<div class="padded-full">
 		<h5 class="pull-right">Out of Marks</h5>
 	</div>
@@ -41,6 +56,8 @@
 	<div class="padded-full">
 		<input type="text" name="contribution" value="{{ old('contribution') }}" autocomplete="off" placeholder="Enter Contribution Marks">
 	</div>
+	@endif
+
 	<div class="padded-full">
 		<ul class="list">
 			<li class="padded-for-list">
@@ -52,7 +69,7 @@
 			</li>
 			<li class="padded-for-list">
 				<label class="radio">
-					<input type="radio" name="grades" value="selectstudents" checked>
+					<input type="radio" name="grades" value="selectstudents">
 					Create for Select Students
 					<span></span>
 				</label>

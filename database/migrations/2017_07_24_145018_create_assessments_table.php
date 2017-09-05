@@ -21,6 +21,10 @@ class CreateAssessmentsTable extends Migration
 
             $table->string('name')->index();
 
+            $table->integer('teacher_id')->unsigned()->index();
+
+            $table->foreign('teacher_id')->references('id')->on('users')->onDelete('cascade');
+
             $table->double('out_of')->nullable()->index();
 
             $table->double('contribution')->index();

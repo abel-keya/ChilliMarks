@@ -1,12 +1,15 @@
 <?php
 
-namespace chilliapp\Http\Controllers\Core\Reports;
+namespace chillimarks\Http\Controllers\Core\Reports;
 
 use Illuminate\Http\Request;
-use chilliapp\Http\Controllers\Controller;
-use chilliapp\Models\Classes;
-use chilliapp\Models\Stream;
-use chilliapp\Models\Group;
+use chillimarks\Http\Controllers\Controller;
+use chillimarks\Models\Classes;
+use chillimarks\Models\Stream;
+use chillimarks\Models\Exam;
+use chillimarks\Models\Group;
+use chillimarks\Models\ClassesReport;
+use chillimarks\Models\School;
 use Auth;
 
 class ReportsController extends Controller
@@ -15,16 +18,20 @@ class ReportsController extends Controller
     {	
     	$page = 'Reports';
 
-    	return view('core.reports.index', compact('page'));
+        $school = School::first();
+
+    	return view('core.reports.index', compact('page', 'school'));
     }
 
     public function reportforms()
     {
     	$page = 'Report Forms';
 
+        $classesreports = ClassesReport::get();
+
         $streams = Stream::get();
 
-    	return view('core.reports.report-forms', compact('page', 'streams'));
+    	return view('core.reports.report-forms', compact('page', 'classesreports', 'streams'));
     }
 
     public function postreportform(Request $request)
@@ -42,15 +49,6 @@ class ReportsController extends Controller
         $year                 = $request->input('year');
         $from_user            = Auth::user()->id;
 
-    }
-
-    public function streamreports()
-    {
-    	$page = 'Stream Report';
-
-        $streams = Stream::get();
-
-        return view('core.reports.streams', compact('page', 'streams'));
     }
 
     public function poststreamreport(Request $request)

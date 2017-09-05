@@ -1,9 +1,11 @@
 <?php
 
-namespace chilliapp\Models;
+namespace chillimarks\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use chillimarks\Models\Grade;
+use chillimarks\Models\Assessment;
 
 class User extends Authenticatable
 {
@@ -29,14 +31,19 @@ class User extends Authenticatable
 
     public function admission()
     {
-        return $this->hasOne('chilliapp\Models\Admission');
+        return $this->hasOne('chillimarks\Models\Admission');
     }
 
+    public function kcpe()
+    {
+        return $this->hasOne('chillimarks\Models\Kcpe', 'student_id');
+    }
+    
     /*  Role User Relationship
     |--------------------------------------------------------------------------| */
     public function roles()
     {
-        return $this->belongsToMany('chilliapp\Models\Role')->withTimestamps();
+        return $this->belongsToMany('chillimarks\Models\Role')->withTimestamps();
     }
 
 
@@ -64,7 +71,7 @@ class User extends Authenticatable
 
     public function groups()
     {
-        return $this->belongsToMany('chilliapp\Models\Group')->withTimestamps();
+        return $this->belongsToMany('chillimarks\Models\Group')->withTimestamps();
     }
 
 
@@ -92,7 +99,7 @@ class User extends Authenticatable
 
     public function streams()
     {
-        return $this->belongsToMany('chilliapp\Models\Stream')->withTimestamps();
+        return $this->belongsToMany('chillimarks\Models\Stream')->withTimestamps();
     }
 
 
@@ -115,12 +122,41 @@ class User extends Authenticatable
         return $this->streams()->detach($stream);
     }
 
+    /*  Subject User Relationship
+    |--------------------------------------------------------------------------| */
+
+    public function subjects()
+    {
+        return $this->belongsToMany('chillimarks\Models\Subject')->withTimestamps();
+    }
+
+
+    public function hasSubject($name)
+    {
+        foreach($this->subjects as $subject)
+        {
+            if($subject->name == $name) return true;
+        }
+        return false;
+    }
+
+    public function assignSubject($subject)
+    {
+        return $this->subjects()->attach($subject);
+    }
+
+    public function removeSubject($subject)
+    {
+        return $this->subjects()->detach($subject);
+    }
+
 
     /*  Assessment User Relationship
     |--------------------------------------------------------------------------| */
 
     public function grades()
     {
-        return $this->hasMany('chilliapp\Models\Grade', 'student_id');
+        return $this->hasMany('chillimarks\Models\Grade', 'student_id');
     }
+
 }

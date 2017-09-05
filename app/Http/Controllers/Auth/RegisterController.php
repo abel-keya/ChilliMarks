@@ -1,9 +1,9 @@
 <?php
 
-namespace chilliapp\Http\Controllers\Auth;
+namespace chillimarks\Http\Controllers\Auth;
 
-use chilliapp\User;
-use chilliapp\Http\Controllers\Controller;
+use chillimarks\User;
+use chillimarks\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -58,7 +58,7 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \chilliapp\User
+     * @return \chillimarks\User
      */
     protected function create(array $data)
     {

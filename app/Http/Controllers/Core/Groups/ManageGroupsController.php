@@ -1,11 +1,11 @@
 <?php
 
-namespace chilliapp\Http\Controllers\Core\Groups;
+namespace chillimarks\Http\Controllers\Core\Groups;
 
 use Illuminate\Http\Request;
-use chilliapp\Http\Controllers\Controller;
-use chilliapp\Models\Group;
-use chilliapp\Models\User;
+use chillimarks\Http\Controllers\Controller;
+use chillimarks\Models\Group;
+use chillimarks\Models\User;
 
 class ManageGroupsController extends Controller
 {   

@@ -67,7 +67,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => chilliapp\Models\User::class,
+            'model' => chillimarks\Models\User::class,
         ],
 
         // 'users' => [

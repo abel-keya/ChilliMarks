@@ -25,7 +25,7 @@
 <form method="POST" action="{{ url('search-students')}}">
 	<div class="padded-full">
 		{{ csrf_field() }}
-		<input type="text" name="search" placeholder="Search students here..." autocomplete="off" autofocus/>
+		<input type="text" name="search" placeholder="Search Students" autocomplete="off" autofocus/>
 	</div>
 	<div class="padded-full">
 		<button type="submit" class="btn fit-parent primary">Search</button>
@@ -41,14 +41,20 @@
 </div>
 <div class="padded-full">
 	<ul class="list" style="padding: 20px 0px 20px 0px;">
-		<li class="divider text-center"><p>All students</p></li>
+		<li class="divider text-center"><p>All Students</p></li>
 	</ul>
 </div>
 <div class="padded-full">
 	<ul class="list">
 		@foreach($students as $student)
 			<li>
-				<a class="padded-list" href="{{ url('view-student', $student->id) }}">{{ $student->name }} {{ $student->class }} {{ $student->adm_no }}</a>
+				<a href="{{ url('view-student', $student->id) }}">
+					@foreach($student->streams as $stream) 
+						<strong>{{ $stream->abbr}}:</strong> 
+					@endforeach
+					{{ $student->name }} {{ $student->class }} Adm. {{ $student->admission->adm_no }} @if(count($student->kcpe)>0) {{ $student->kcpe->marks }} @endif
+				</a>
+
 			</li>
 		@endforeach
 	</ul>

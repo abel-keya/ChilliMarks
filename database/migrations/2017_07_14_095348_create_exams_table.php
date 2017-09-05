@@ -21,10 +21,6 @@ class CreateExamsTable extends Migration
             
             $table->integer('subject_id')->unsigned()->index();
             
-            $table->integer('teacher_id')->unsigned()->index();
-
-            $table->foreign('teacher_id')->references('id')->on('users')->onDelete('cascade');
-            
             $table->integer('stream_id')->unsigned()->index();
 
             $table->string('period')->index();

@@ -22,6 +22,8 @@ class CreateSchoolTable extends Migration
             $table->string('address')->index();
             
             $table->string('phone')->index();
+
+            $table->string('school_type')->index();
             
             $table->integer('from_user')->unsigned()->index();
 

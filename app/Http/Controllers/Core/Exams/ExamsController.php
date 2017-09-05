@@ -1,16 +1,16 @@
 <?php
 
-namespace chilliapp\Http\Controllers\Core\Exams;
+namespace chillimarks\Http\Controllers\Core\Exams;
 
 use Illuminate\Http\Request;
-use chilliapp\Http\Controllers\Controller;
-use chilliapp\Models\Exam;
-use chilliapp\Models\Subject;
-use chilliapp\Models\User;
-use chilliapp\Models\Classes;
-use chilliapp\Models\Stream;
-use chilliapp\Models\Grade;
-use chilliapp\Models\Assessment;
+use chillimarks\Http\Controllers\Controller;
+use chillimarks\Models\Exam;
+use chillimarks\Models\Subject;
+use chillimarks\Models\User;
+use chillimarks\Models\Classes;
+use chillimarks\Models\Stream;
+use chillimarks\Models\Grade;
+use chillimarks\Models\Assessment;
 use Auth;
 
 class ExamsController extends Controller
@@ -19,7 +19,7 @@ class ExamsController extends Controller
     {
     	$page = 'Exams';
 
-    	$exams = Exam::get();
+    	$exams = Exam::latest()->limit(100)->get();
 
     	return view('core.exams.index', compact('page', 'exams'));
     }
@@ -38,9 +38,6 @@ class ExamsController extends Controller
 
         $exams = Exam::where('name', 'LIKE', '%' . $query . '%')
             ->orWhereHas('subject', function ($term) use($query) {
-                $term->where('name','LIKE', '%' . $query . '%');
-            })
-            ->orWhereHas('teacher', function ($term) use($query) {
                 $term->where('name','LIKE', '%' . $query . '%');
             })
             ->orWhereHas('classes', function ($term) use($query) {
@@ -76,7 +73,26 @@ class ExamsController extends Controller
 
         $assessments = Assessment::whereExamId($exam->id)->get();
 
-    	return view('core.exams.view', compact('page', 'exam', 'assessments'));
+
+        //code to hide create assessment if total contribution is > 100% and exam is not Social studies = S.S
+        $assessments_sum = $assessments->sum('contribution');
+
+        $can_create_assessment = True;
+
+        if($assessments_sum >= 99.99999)
+        {   
+            $can_create_assessment = False;
+
+            //take care of social studies assessments sum
+            if($assessments_sum <= 160 && $exam->subject->code == 'S.S')
+            {   
+                $can_create_assessment = True;
+            }
+        }
+
+        
+
+    	return view('core.exams.view', compact('page', 'exam', 'assessments', 'can_create_assessment'));
     }
 
     public function create()
@@ -85,16 +101,9 @@ class ExamsController extends Controller
 
       $subjects = Subject::get();
 
-      $teachers = User::whereHas(
-            'roles', function($q){
-                $q->where('name', 'teacher');
-            }
-        )->get();
-
-
       $streams  = Stream::get();
 
-      return view('core.exams.create', compact('page', 'subjects', 'teachers', 'streams'));
+      return view('core.exams.create', compact('page', 'subjects', 'streams'));
     }
 
     public function postcreate(Request $request)
@@ -102,24 +111,21 @@ class ExamsController extends Controller
     	$this->validate($request, [
         'name'                 => 'required|min:1',
         'subject_id'           => 'required',
-        'teacher_id'           => 'required',
         'stream_id'            => 'required',
         'period'               => 'required',
         'year'                 => 'required'
         ]);
 
-    	$name                     = $request->input('name');
-    	$subject_id               = $request->input('subject_id');
-    	$teacher_id               = $request->input('teacher_id');
-    	$stream_id                = $request->input('stream_id');
-      $period                   = $request->input('period');
-      $year                     = $request->input('year');
-      $from_user                = Auth::user()->id;
+    	    $name                     = $request->input('name');
+    	    $subject_id               = $request->input('subject_id');
+    	    $stream_id                = $request->input('stream_id');
+            $period                   = $request->input('period');
+            $year                     = $request->input('year');
+            $from_user                = Auth::user()->id;
 
       $exam                     = Exam::create([
         'name'                => $name,
         'subject_id'          => $subject_id,
-        'teacher_id'          => $teacher_id,
         'stream_id'           => $stream_id,
         'period'              => $period,
         'year'                => $year,
@@ -129,7 +135,7 @@ class ExamsController extends Controller
 
       $message = 'Exam created successfully!';
 
-      return redirect('exams')->with('success', $message);
+      return redirect()->route('view-exam', [$exam->id])->with('success', $message);
     }
 
     public function edit($id)
@@ -138,46 +144,33 @@ class ExamsController extends Controller
 
     	$exam = Exam::whereId($id)->first();
 
-      $subjects = Subject::get();
-
-      $teachers = User::whereHas(
+        $teachers = User::whereHas(
             'roles', function($q){
                 $q->where('name', 'teacher');
             }
         )->get();
 
-      $streams  = Stream::get();
-
-    	return view('core.exams.edit', compact('page', 'exam', 'subjects', 'teachers', 'streams'));
+    	return view('core.exams.edit', compact('page', 'exam', 'teachers'));
     }
 
     public function update(Request $request, $id)
     {
     	$this->validate($request, [
-        'name'                 => 'required|min:1',
-        'subject_id'           => 'required',
-        'teacher_id'           => 'required',
-        'stream_id'            => 'required',
-        'period'               => 'required',
-        'year'                 => 'required'
-      ]);
+            'name'                 => 'required|min:1',
+            'period'               => 'required',
+            'year'                 => 'required'
+        ]);
 
     	$name                     = $request->input('name');
-    	$subject_id               = $request->input('subject_id');
-    	$teacher_id               = $request->input('teacher_id');
-    	$stream_id                = $request->input('stream_id');
-      $period                   = $request->input('period');
-      $year                     = $request->input('year');
-      $from_user                = Auth::user()->id;
+        $period                   = $request->input('period');
+        $year                     = $request->input('year');
+        $from_user                = Auth::user()->id;
 
-      $exam                     = Exam::whereId($id)->update([
-        'name'                => $name,
-        'subject_id'          => $subject_id,
-        'teacher_id'          => $teacher_id,
-        'stream_id'           => $stream_id,
-        'period'              => $period,
-        'year'                => $year,
-        'from_user'           => $from_user
+        $exam                     = Exam::whereId($id)->update([
+            'name'                => $name,
+            'period'              => $period,
+            'year'                => $year,
+            'from_user'           => $from_user
         ]);
 
       $message = 'Exam updated successfully.';
@@ -196,12 +189,91 @@ class ExamsController extends Controller
 
     public function delete($id)
     {
-    	$exam = Exam::whereId($id)->first();
+    	$exam        = Exam::whereId($id)->first();
+
+        $assessments = Assessment::whereExamId($id)->get();
+
+        foreach($assessments as $assessment)
+        {
+            $assessment_current = $assessment->id;
+
+            Grade::whereAssessmentId($assessment_current)->delete();
+
+            Assessment::whereId($assessment_current)->delete();
+        }
 
     	$exam->delete();
 
-    	$message = 'Exam deleted successfully.';
+    	$message = 'Exam, its associated assessment and grades deleted successfully!';
 
     	return redirect('exams')->with('success', $message);
     }
+
+    public function createallexams()
+    {
+        $page = 'Create All Exams';
+
+        return view('core.exams.create-all', compact('page'));
+    }
+
+    public function postcreateallexams(Request $request)
+    {
+        $this->validate($request, [
+            'exam_name'           => 'required',
+            'period'              => 'required',
+            'year'                => 'required'
+        ]);
+
+        $exam_name                = $request->input('exam_name');
+        $period                   = $request->input('period');
+        $year                     = $request->input('year');
+
+        //To be completed ...roadblocks..creating grades for select students cre, ire, hre,..
+        /*$subjects = Subject::get();
+
+        $streams = Stream::get();
+
+        $exam                     = Exam::create([
+            'name'                => $name,
+            'subject_id'          => $subject_id,
+            'stream_id'           => $stream_id,
+            'period'              => $period,
+            'year'                => $year,
+            'status'              => 0,
+            'from_user'           => $from_user
+        ]);
+
+
+        $students                     = User::WhereHas(
+                                       'streams', function($q) use ($stream_id){
+                                       $q->where('stream_id', $stream_id);
+                                       }
+                                      )->get();
+
+
+        $assessment                   = Assessment::create([
+                    'exam_id'                 => $id,
+                    'name'                    => $assessment_name,
+                    'teacher_id'              => $teacher_id,
+                    'out_of'                  => $out_of,
+                    'contribution'            => $contribution,
+                    'status'                  => 0,
+                    'from_user'               => $from_user
+                ]);
+
+
+        foreach($students as $student)
+                    {
+                          $grade = Grade::create([
+                              'assessment_id'       => $assessment->id,
+                              'student_id'          => $student->id,
+                              'marks'               => 0,
+                              'status'              => 0,
+                              'from_user'           => $from_user
+                          ]);
+                    }*/
+
+
+    }
+
 }

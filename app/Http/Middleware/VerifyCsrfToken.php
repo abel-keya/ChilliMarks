@@ -1,6 +1,6 @@
 <?php
 
-namespace chilliapp\Http\Middleware;
+namespace chillimarks\Http\Middleware;
 
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as BaseVerifier;
 

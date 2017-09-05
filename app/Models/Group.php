@@ -1,6 +1,6 @@
 <?php
 
-namespace chilliapp\Models;
+namespace chillimarks\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,6 +10,6 @@ class Group extends Model
 
     public function fromUser()
     {
-    	return $this->belongsTo('chilliapp\Models\User','from_user');
+    	return $this->belongsTo('chillimarks\Models\User','from_user');
   	}
 }

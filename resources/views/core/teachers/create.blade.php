@@ -50,7 +50,7 @@
 		<ul class="list">
 			<li class="">
 				<label class="checkbox">
-				<input type="checkbox" name="defaultpassword" value="1">
+				<input type="checkbox" name="defaultpassword" value="1" checked>
 					Use default password: "password"
 					<span></span>
 				</label>

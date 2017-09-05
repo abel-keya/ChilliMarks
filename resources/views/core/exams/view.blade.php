@@ -25,7 +25,6 @@
     <ul class="list">
         <li><strong>Exam Name:</strong> {{ $exam->name }}</li>
         <li><strong>Subject:</strong> {{ $exam->subject->name }}</li>
-        <li><strong>Teacher:</strong> {{ $exam->teacher->name }}</li>
         <li><strong>Class:</strong> {{ $exam->stream->name }}</li>
         <li><strong>Period:</strong> {{ $exam->period }}, {{ $exam->year }}</li>
     </ul>
@@ -43,13 +42,14 @@
         @endforeach
     </ul>
 </div>
-<div class="padded-full">
+<div class="padded-full"> 
+
+    @if($can_create_assessment)
     <a href="{{ url('create-assessment', $exam->id) }}">
         <button class="btn fit-parent primary">Create Assessment</button>
     </a>
-    <a href="{{ url('view-grades', $exam->id) }}">
-        <button class="btn fit-parent primary" style="margin-top: 10px;">View Grades</button>
-    </a>
+    @endif
+
     <a href="{{ url('edit-exam', $exam->id) }}">
         <button class="btn fit-parent primary" style="margin-top: 10px;">Edit Exam</button>
     </a>

@@ -25,7 +25,6 @@
     <ul class="list">
         <li><strong>Assessment:</strong> {{ $assessment->exam->name}}, {{ $assessment->name }}</li>
         <li><strong>Subject:</strong> {{ $assessment->exam->subject->name }}</li>
-        <li><strong>Teacher:</strong> {{ $assessment->exam->teacher->name }}</li>
         <li><strong>Period:</strong> {{ $assessment->exam->period }}, {{ $assessment->exam->year }}</li>
     </ul>
 </div>

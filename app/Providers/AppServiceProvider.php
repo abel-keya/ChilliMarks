@@ -1,6 +1,6 @@
 <?php
 
-namespace chilliapp\Providers;
+namespace chillimarks\Providers;
 
 use Illuminate\Support\ServiceProvider;
 

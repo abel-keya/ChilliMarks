@@ -1,10 +1,10 @@
 <?php
 
-namespace chilliapp\Http\Controllers\Auth;
+namespace chillimarks\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
-use chilliapp\Http\Controllers\Controller;
-use chilliapp\Models\User;
+use chillimarks\Http\Controllers\Controller;
+use chillimarks\Models\User;
 use Auth;
 
 class LoginController extends Controller
@@ -22,7 +22,7 @@ class LoginController extends Controller
 
     public function index()
     {   
-        $page = 'ChilliApp';
+        $page = 'ChilliMarks';
 
         return view('core.auth.signin', compact('page'));
     }
@@ -39,7 +39,7 @@ class LoginController extends Controller
         {   
             if(Auth::user()->hasRole('teacher'))
             {
-                return redirect('teacher-exams');
+                return redirect('teacher-assessments');
             }
 
             return redirect('exams');

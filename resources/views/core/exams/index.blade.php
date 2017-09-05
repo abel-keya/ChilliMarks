@@ -24,7 +24,7 @@
 <form method="POST" action="{{ url('search-exams') }}">
 	<div class="padded-full">
 		{{ csrf_field() }}
-		<input type="text" name="search" placeholder="Search exams here..." autocomplete="off" autofocus/>
+		<input type="text" name="search" placeholder="Search Exams" autocomplete="off" autofocus/>
 	</div>
 	<div class="padded-full">
 		<button type="submit" class="btn fit-parent primary">Search</button>
@@ -35,6 +35,11 @@
 		<button class="btn fit-parent primary" style="margin-top: 10px;">Add New Exam</button>
 	</a>	
 </div>
+{{-- <div class="padded-full">
+	<a href="{{ url('create-all-exams') }}">
+		<button class="btn fit-parent primary" style="margin-top: 10px;">Create All Exams</button>
+	</a>	
+</div> --}}
 <div class="padded-full">
 	<ul class="list" style="padding: 20px 0px 20px 0px;">
 		<li class="divider text-center"><p>All Exams</p></li>
@@ -46,7 +51,7 @@
 		@foreach($exams as $exam)
 		<li>
 			<a class="padded-list" href="{{ url('view-exam', $exam->id)}}">
-				<strong>{{ $exam->name }} Exam:</strong> {{ $exam->stream->name }}, {{ $exam->subject->name }}, {{ $exam->teacher->name }}
+				<strong>{{ $exam->stream->abbr }}</strong>, {{ $exam->name }}, {{ $exam->subject->abbr }}
 			</a>
 		</li>
 		@endforeach

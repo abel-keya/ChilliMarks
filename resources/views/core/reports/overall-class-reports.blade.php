@@ -51,7 +51,7 @@
 		<select name="year">
 			<option disabled>Select a Year</option>
 			@for($i=0; $i<=80; $i++) 
-		   		<option value='{{1970 + $i}}' @if( (1970 + $i)== date('Y') ) selected @endif>{{1970 + $i}}</option>
+		   		<option value='{{1970 + $i}}' @if( (1970 + $i) == date('Y') ) selected @endif>{{1970 + $i}}</option>
 		   	@endfor
 		</select>
 	</div>
