@@ -15,10 +15,11 @@ class SchoolSeeder extends Seeder
         DB::table('school')->delete(); 
 
         School::create([
-            'name'      => 'ChilliMarks School',
-            'address'   => 'P.O. Box 12345 - 00100, Nairobi, Kenya.',
-            'phone'     => '+254 703 333 231',
-            'from_user' => 1
+            'name'         => 'ChilliMarks School',
+            'address'      => 'P.O. Box 12345 - 00100, Nairobi, Kenya.',
+            'phone'        => '+254 703 333 231',
+            'school_type'  => 'kenyan_primary',
+            'from_user'    => 1
         ]);
     }
 }
