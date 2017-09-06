@@ -43,6 +43,16 @@ class AssessmentsController extends Controller
 
         $school     = School::first();
 
+        $teachers = User::whereHas(
+            'roles', function($q){
+                $q->where('name', 'teacher');
+            }
+        )->whereHas(
+            'subjects', function($q) use($subject_code){
+                $q->where('code', $subject_code);
+            }
+        )->get();
+
         //Populate select element named code
         if($subject_code =='MATHS')
         {
@@ -65,19 +75,20 @@ class AssessmentsController extends Controller
         } elseif ($subject_code == 'S.S')
         {
             $codes = ['Social Studies', 'C.R.E', 'I.R.E', 'H.R.E'];
+
+            $teachers = User::whereHas(
+                'roles', function($q){
+                    $q->where('name', 'teacher');
+                }
+            )->whereHas(
+                'subjects', function($q){
+                $q->where('code', 'S.S')
+                    ->orWhere('code', 'C.R.E')
+                    ->orWhere('code', 'I.R.E')
+                    ->orWhere('code', 'H.R.E');
+                }
+            )->get();
         }
-
-
-        $teachers = User::whereHas(
-            'roles', function($q){
-                $q->where('name', 'teacher');
-            }
-        )->whereHas(
-            'subjects', function($q) use($subject_code){
-                $q->where('code', $subject_code);
-            }
-        )->get();
-
 
         return view('core.assessments.create', compact('page', 'id', 'teachers', 'codes', 'selected', 'school'));
     }

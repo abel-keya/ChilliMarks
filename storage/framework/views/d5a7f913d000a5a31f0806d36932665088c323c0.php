@@ -34,7 +34,6 @@
 		<button class="btn fit-parent primary" style="margin-top: 10px;">Add New Exam</button>
 	</a>	
 </div>
-
 <div class="padded-full">
 	<ul class="list" style="padding: 20px 0px 20px 0px;">
 		<li class="divider text-center"><p>All Exams</p></li>
