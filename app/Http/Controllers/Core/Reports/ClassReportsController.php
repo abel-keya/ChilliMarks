@@ -695,9 +695,9 @@ class ClassReportsController extends Controller
 
 
 
-                        $students_marks[$i]['final_total']     = number_format($exam_total_marks, 2);
+                        $students_marks[$i]['final_total']     = number_format($exam_total_marks, 0);
 
-                        $marks_total_marks[$i]        = number_format($exam_total_marks, 2);
+                        $marks_total_marks[$i]        = number_format($exam_total_marks, 0);
                     } 
                     
                     if($social_studies_grade && $ire_grade)
@@ -712,9 +712,9 @@ class ClassReportsController extends Controller
 
 
 
-                        $students_marks[$i]['final_total']     = number_format($exam_total_marks, 2);
+                        $students_marks[$i]['final_total']     = number_format($exam_total_marks, 0);
 
-                        $marks_total_marks[$i]        = number_format($exam_total_marks, 2);
+                        $marks_total_marks[$i]        = number_format($exam_total_marks, 0);
                     }   
                     
                     if($social_studies_grade && $hre_grade)
@@ -729,9 +729,9 @@ class ClassReportsController extends Controller
 
 
 
-                        $students_marks[$i]['final_total']     = number_format($exam_total_marks, 2);
+                        $students_marks[$i]['final_total']     = number_format($exam_total_marks, 0);
 
-                        $marks_total_marks[$i]        = number_format($exam_total_marks, 2);
+                        $marks_total_marks[$i]        = number_format($exam_total_marks, 0);
                     }
                         
                 }
@@ -836,7 +836,7 @@ class ClassReportsController extends Controller
 
                 if(sizeof($marks_total_marks)!=0){
                     $mean_marks_total_marks            = array_sum($marks_total_marks)/sizeof($marks_total_marks);
-                    $mean_marks_total_marks            = number_format($mean_marks_total_marks, 2);
+                    $mean_marks_total_marks            = number_format($mean_marks_total_marks, 0);
                 } else {
                     $mean_marks_total_marks                = 0;
                 }

@@ -368,9 +368,9 @@ class StreamReportsController extends Controller
 
                     $mathematics_final = ($mathematics_marks / $mathematics_assessment_outof) * $mathematics_assessment_contr;
 
-                    $students_marks[$i]['mathematics'] = $mathematics_final;
+                    $students_marks[$i]['mathematics'] = number_format($mathematics_final, 2);
 
-                    $marks_mathematics[$i]             = $mathematics_final;
+                    $marks_mathematics[$i]             = number_format($mathematics_final, 2);
 
 
 
@@ -396,9 +396,9 @@ class StreamReportsController extends Controller
 
                     $english_final = ($english_marks / $english_assessment_outof) * $english_assessment_contr;
 
-                    $students_marks[$i]['english'] = $english_marks;
+                    $students_marks[$i]['english'] = number_format($english_marks, 2);
 
-                    $marks_english[$i]             =   $english_final;
+                    $marks_english[$i]             =   number_format($english_final, 2);
 
 
 
@@ -425,18 +425,18 @@ class StreamReportsController extends Controller
 
                     $composition_final               = ($composition_marks / $composition_assessment_outof) * $composition_assessment_contr;
 
-                    $students_marks[$i]['composition']  = $composition_marks;
+                    $students_marks[$i]['composition']  = number_format($composition_marks, 2);
 
-                    $marks_composition[$i]           = $composition_final;
+                    $marks_composition[$i]           = number_format($composition_final, 2);
 
 
 
 
                     $english_total_final             = $english_final + $composition_final;
 
-                    $students_marks[$i]['english_total']                = $english_total_final;
+                    $students_marks[$i]['english_total']                = number_format($english_total_final, 2);
 
-                    $marks_english_total[$i]           = $english_total_final;
+                    $marks_english_total[$i]           = number_format($english_total_final, 2);
 
 
 
@@ -462,9 +462,9 @@ class StreamReportsController extends Controller
 
                     $kiswahili_final = ($kiswahili_marks / $kiswahili_assessment_outof) * $kiswahili_assessment_contr;
 
-                    $students_marks[$i]['kiswahili'] = $kiswahili_marks;
+                    $students_marks[$i]['kiswahili'] = number_format($kiswahili_marks, 2);
 
-                    $marks_kiswahili[$i]           = $kiswahili_final;
+                    $marks_kiswahili[$i]           = number_format($kiswahili_final, 2);
 
 
 
@@ -491,18 +491,18 @@ class StreamReportsController extends Controller
 
                     $insha_final                   = ($insha_marks / $insha_assessment_outof) * $insha_assessment_contr;
 
-                    $students_marks[$i]['insha']   = $insha_marks;
+                    $students_marks[$i]['insha']   = number_format($insha_marks, 2);
 
-                    $marks_insha[$i]               = $insha_final;
+                    $marks_insha[$i]               = number_format($insha_final, 2);
 
 
 
 
                     $kiswahili_total_final         = $kiswahili_final + $insha_final;
 
-                    $students_marks[$i]['kiswahili_total']              = $kiswahili_total_final;
+                    $students_marks[$i]['kiswahili_total']              = number_format($kiswahili_total_final, 2);
 
-                    $marks_kiswahili_total[$i]           = $kiswahili_total_final;
+                    $marks_kiswahili_total[$i]           = number_format($kiswahili_total_final, 2);
 
 
                     
@@ -528,9 +528,9 @@ class StreamReportsController extends Controller
 
                     $science_final                 = ($science_marks / $science_assessment_outof) * $science_assessment_contr;
 
-                    $students_marks[$i]['science']              = $science_final;
+                    $students_marks[$i]['science']              = number_format($science_final, 2);
 
-                    $marks_science[$i]             = $science_final;
+                    $marks_science[$i]             = number_format($science_final, 2);
 
 
 
@@ -558,9 +558,9 @@ class StreamReportsController extends Controller
 
                     $social_studies_final                 = ($social_studies_marks / $social_studies_assessment_outof) * $social_studies_assessment_contr;
 
-                    $students_marks[$i]['social_studies'] = $social_studies_marks;
+                    $students_marks[$i]['social_studies'] = number_format($social_studies_marks, 2);
 
-                    $marks_social_studies[$i]             = $social_studies_marks;
+                    $marks_social_studies[$i]             = number_format($social_studies_marks, 2);
 
 
 
@@ -588,9 +588,9 @@ class StreamReportsController extends Controller
 
                         $cre_final                 = ($cre_marks / $cre_assessment_outof) * $cre_assessment_contr;
 
-                        $students_marks[$i]['cre'] = $cre_marks;
+                        $students_marks[$i]['cre'] = number_format($cre_marks, 2);
 
-                        $marks_cre[$i]             = $cre_marks;
+                        $marks_cre[$i]             = number_format($cre_marks, 2);
 
 
                     } else {
@@ -625,9 +625,9 @@ class StreamReportsController extends Controller
 
                         $ire_final                 = ($ire_marks / $ire_assessment_outof) * $ire_assessment_contr;
 
-                        $students_marks[$i]['ire']          = $ire_marks;
+                        $students_marks[$i]['ire']          = number_format($ire_marks, 2);
 
-                        $marks_ire[$i]             = $ire_marks;
+                        $marks_ire[$i]             = number_format($ire_marks, 2);
 
                     } else {
                         $students_marks[$i]['ire']          = 0;
@@ -659,9 +659,9 @@ class StreamReportsController extends Controller
 
                         $hre_final                     = ($hre_marks / $hre_assessment_outof) * $hre_assessment_contr;
 
-                        $students_marks[$i]['hre']     = $hre_marks;
+                        $students_marks[$i]['hre']     = number_format($hre_marks, 2);
 
-                        $marks_hre[$i]                 = $hre_marks;
+                        $marks_hre[$i]                 = number_format($hre_marks, 2);
 
                     } else {
                         $students_marks[$i]['hre']     = 0;
@@ -676,15 +676,15 @@ class StreamReportsController extends Controller
 
                         $exam_total_marks              = $exam_pretotal_marks + $total_social_studies_final;
 
-                        $students_marks[$i]['social_studies_total']     = $total_social_studies_final;
+                        $students_marks[$i]['social_studies_total']     = number_format($total_social_studies_final, 2);
 
-                        $marks_total_social_studies[$i]        = $total_social_studies_final;
+                        $marks_total_social_studies[$i]        = number_format($total_social_studies_final, 2);
 
 
 
-                        $students_marks[$i]['final_total']     = $exam_total_marks;
+                        $students_marks[$i]['final_total']     = number_format($exam_total_marks, 0);
 
-                        $marks_total_marks[$i]        = $exam_total_marks;
+                        $marks_total_marks[$i]        = number_format($exam_total_marks, 0);
                     } 
                     
                     if($social_studies_grade && $ire_grade)
@@ -693,15 +693,15 @@ class StreamReportsController extends Controller
 
                         $exam_total_marks              = $exam_pretotal_marks + $total_social_studies_final;
                         
-                        $students_marks[$i]['social_studies_total']     = $total_social_studies_final;
+                        $students_marks[$i]['social_studies_total']     = number_format($total_social_studies_final, 2);
 
-                        $marks_total_social_studies[$i]  = $total_social_studies_final;
+                        $marks_total_social_studies[$i]  = number_format($total_social_studies_final, 2);
 
 
 
-                        $students_marks[$i]['final_total']     = $exam_total_marks;
+                        $students_marks[$i]['final_total']     = number_format($exam_total_marks, 0);
 
-                        $marks_total_marks[$i]        = $exam_total_marks;
+                        $marks_total_marks[$i]        = number_format($exam_total_marks, 0);
                     }   
                     
                     if($social_studies_grade && $hre_grade)
@@ -710,15 +710,15 @@ class StreamReportsController extends Controller
 
                         $exam_total_marks              = $exam_pretotal_marks + $total_social_studies_final;
                         
-                        $students_marks[$i]['social_studies_total']     = $total_social_studies_final;
+                        $students_marks[$i]['social_studies_total']     = number_format($total_social_studies_final, 2);
 
-                        $marks_total_social_studies[$i]  = $total_social_studies_final;
+                        $marks_total_social_studies[$i]  = number_format($total_social_studies_final, 2);
 
 
 
-                        $students_marks[$i]['final_total']     = $exam_total_marks;
+                        $students_marks[$i]['final_total']     = number_format($exam_total_marks, 0);
 
-                        $marks_total_marks[$i]        = $exam_total_marks;
+                        $marks_total_marks[$i]        = number_format($exam_total_marks, 0);
                     }
                         
                 }
@@ -732,91 +732,104 @@ class StreamReportsController extends Controller
 
                 if(sizeof($marks_mathematics)!=0){
                     $mean_marks_mathematics            = array_sum($marks_mathematics)/sizeof($marks_mathematics);
+                    $mean_marks_mathematics            = number_format($mean_marks_mathematics, 2);
                 } else {
                     $mean_marks_mathematics = 0;
                 }
 
                 if(sizeof($marks_english)!=0){
                     $mean_marks_english                = array_sum($marks_english)/sizeof($marks_english);
+                    $mean_marks_english                = number_format($mean_marks_english, 2);
                 } else {
                     $mean_marks_english                = 0;
                 }
 
                 if(sizeof($marks_composition)!=0){
                     $mean_marks_composition            = array_sum($marks_composition)/sizeof($marks_composition);
+                    $mean_marks_composition            = number_format($mean_marks_composition, 2);
                 } else {
                     $mean_marks_composition                = 0;
                 }
 
                 if(sizeof($marks_english_total)!=0){
                     $mean_marks_english_total          = array_sum($marks_english_total)/sizeof($marks_english_total);
+                    $mean_marks_english_total          = number_format($mean_marks_english_total, 2);
                 } else {
                     $mean_marks_english_total                = 0;
                 }
 
                 if(sizeof($marks_kiswahili)!=0){
                     $mean_marks_kiswahili              = array_sum($marks_kiswahili)/sizeof($marks_kiswahili);
+                    $mean_marks_kiswahili              = number_format($mean_marks_kiswahili, 2);
                 } else {
                     $mean_marks_kiswahili                = 0;
                 }
 
                 if(sizeof($marks_insha)!=0){
                     $mean_marks_insha                  = array_sum($marks_insha)/sizeof($marks_insha);
+                    $mean_marks_insha                  = number_format($mean_marks_insha, 2);
                 } else {
                     $mean_marks_insha                = 0;
                 }
 
                 if(sizeof($marks_kiswahili_total)!=0){
                     $mean_marks_kiswahili_total        = array_sum($marks_kiswahili_total)/sizeof($marks_kiswahili_total);
+                    $mean_marks_kiswahili_total        = number_format($mean_marks_kiswahili_total, 2);
                 } else {
                     $mean_marks_kiswahili_total                = 0;
                 }
 
                 if(sizeof($marks_science)!=0){
                     $mean_marks_science                = array_sum($marks_science)/sizeof($marks_science);
+                    $mean_marks_science                = number_format($mean_marks_science, 2);
                 } else {
                     $mean_marks_science                = 0;
                 }
 
                 if(sizeof($marks_social_studies)!=0){
                     $mean_marks_social_studies         = array_sum($marks_social_studies)/sizeof($marks_social_studies);
+                    $mean_marks_social_studies         = number_format($mean_marks_social_studies, 2);
                 } else {
                     $mean_marks_social_studies                = 0;
                 }
 
                 if(sizeof($marks_cre)!=0){
                     $mean_marks_cre                    = array_sum($marks_cre)/sizeof($marks_cre);
+                    $mean_marks_cre                    = number_format($mean_marks_cre, 2);
                 } else {
                     $mean_marks_cre                = 0;
                 }
 
                 if(sizeof($marks_ire)!=0){
                     $mean_marks_ire                    = array_sum($marks_ire)/sizeof($marks_ire);
+                    $mean_marks_ire                    = number_format($mean_marks_ire, 2);
                 } else {
                     $mean_marks_ire                = 0;
                 }
 
                 if(sizeof($marks_hre)!=0){
                     $mean_marks_hre                    = array_sum($marks_hre)/sizeof($marks_hre);
+                    $mean_marks_hre                    = number_format($mean_marks_hre, 2);
                 } else {
                     $mean_marks_hre                = 0;
                 }
 
                 if(sizeof($marks_total_social_studies)!=0){
                     $mean_marks_total_social_studies   = array_sum($marks_total_social_studies)/sizeof($marks_total_social_studies);
+                    $mean_marks_total_social_studies   = number_format($mean_marks_total_social_studies, 2);
                 } else {
                     $mean_marks_total_social_studies                = 0;
                 }
 
                 if(sizeof($marks_total_marks)!=0){
                     $mean_marks_total_marks            = array_sum($marks_total_marks)/sizeof($marks_total_marks);
+                    $mean_marks_total_marks            = number_format($mean_marks_total_marks, 0);
                 } else {
                     $mean_marks_total_marks                = 0;
                 }
                 
                 
                 $students_mean_marks = ['MEAN MARKS', '', '', $mean_marks_mathematics, $mean_marks_english, $mean_marks_composition, $mean_marks_english_total, $mean_marks_kiswahili, $mean_marks_insha, $mean_marks_kiswahili_total, $mean_marks_science, $mean_marks_social_studies, $mean_marks_cre, $mean_marks_ire, $mean_marks_hre, $mean_marks_total_social_studies, $mean_marks_total_marks];
-                //return dd($students_mean_marks);
 
                 //populate header
                 for($i = 0; $i < 17; $i++)
@@ -895,8 +908,6 @@ class StreamReportsController extends Controller
                         $cell->setFontWeight('bold');
                         $cell->setAlignment('center');
                     });
-
-                    //$sheet->row($mean_count, $students_mean_marks[$d]);
                 }
 
                 //merge and center total marks title cells
