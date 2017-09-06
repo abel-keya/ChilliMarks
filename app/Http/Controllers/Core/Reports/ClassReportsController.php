@@ -383,7 +383,7 @@ class ClassReportsController extends Controller
 
                     $students_marks[$i]['mathematics'] = $mathematics_final;
 
-                    $marks_mathematics[$i]             = $mathematics_final;
+                    $marks_mathematics[$i]             = round($mathematics_final,2);
 
 
 
@@ -449,7 +449,7 @@ class ClassReportsController extends Controller
 
                     $students_marks[$i]['english_total']                = $english_total_final;
 
-                    $marks_english_total[$i]           = $english_total_final;
+                    $marks_english_total[$i]           = round($english_total_final, 2);
 
 
 
@@ -515,7 +515,7 @@ class ClassReportsController extends Controller
 
                     $students_marks[$i]['kiswahili_total']              = $kiswahili_total_final;
 
-                    $marks_kiswahili_total[$i]           = $kiswahili_total_final;
+                    $marks_kiswahili_total[$i]           = round($kiswahili_total_final, 2);
 
 
                     
@@ -543,7 +543,7 @@ class ClassReportsController extends Controller
 
                     $students_marks[$i]['science']              = $science_final;
 
-                    $marks_science[$i]             = $science_final;
+                    $marks_science[$i]             = round($science_final, 2);
 
 
 
@@ -697,7 +697,7 @@ class ClassReportsController extends Controller
 
                         $students_marks[$i]['final_total']     = $exam_total_marks;
 
-                        $marks_total_marks[$i]        = $exam_total_marks;
+                        $marks_total_marks[$i]        = round($exam_total_marks, 2);
                     } 
                     
                     if($social_studies_grade && $ire_grade)
@@ -714,7 +714,7 @@ class ClassReportsController extends Controller
 
                         $students_marks[$i]['final_total']     = $exam_total_marks;
 
-                        $marks_total_marks[$i]        = $exam_total_marks;
+                        $marks_total_marks[$i]        = round($exam_total_marks, 2);
                     }   
                     
                     if($social_studies_grade && $hre_grade)
@@ -731,7 +731,7 @@ class ClassReportsController extends Controller
 
                         $students_marks[$i]['final_total']     = $exam_total_marks;
 
-                        $marks_total_marks[$i]        = $exam_total_marks;
+                        $marks_total_marks[$i]        = round($exam_total_marks, 2);
                     }
                         
                 }
@@ -763,6 +763,7 @@ class ClassReportsController extends Controller
 
                 if(sizeof($marks_english_total)!=0){
                     $mean_marks_english_total          = array_sum($marks_english_total)/sizeof($marks_english_total);
+                    $mean_marks_english_total          = round($mean_marks_english_total, 2);
                 } else {
                     $mean_marks_english_total                = 0;
                 }
@@ -781,12 +782,14 @@ class ClassReportsController extends Controller
 
                 if(sizeof($marks_kiswahili_total)!=0){
                     $mean_marks_kiswahili_total        = array_sum($marks_kiswahili_total)/sizeof($marks_kiswahili_total);
+                    $mean_marks_kiswahili_total          = round($mean_marks_kiswahili_total, 2);
                 } else {
                     $mean_marks_kiswahili_total                = 0;
                 }
 
                 if(sizeof($marks_science)!=0){
                     $mean_marks_science                = array_sum($marks_science)/sizeof($marks_science);
+                    $mean_marks_science                = round($mean_marks_science, 2);
                 } else {
                     $mean_marks_science                = 0;
                 }
@@ -817,12 +820,14 @@ class ClassReportsController extends Controller
 
                 if(sizeof($marks_total_social_studies)!=0){
                     $mean_marks_total_social_studies   = array_sum($marks_total_social_studies)/sizeof($marks_total_social_studies);
+                    $mean_marks_total_social_studies   = round($mean_marks_total_social_studies, 2);
                 } else {
                     $mean_marks_total_social_studies                = 0;
                 }
 
                 if(sizeof($marks_total_marks)!=0){
                     $mean_marks_total_marks            = array_sum($marks_total_marks)/sizeof($marks_total_marks);
+                    $mean_marks_total_marks            = round($mean_marks_total_marks, 2);
                 } else {
                     $mean_marks_total_marks                = 0;
                 }
