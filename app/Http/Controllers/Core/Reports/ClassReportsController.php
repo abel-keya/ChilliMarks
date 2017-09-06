@@ -511,11 +511,11 @@ class ClassReportsController extends Controller
 
 
 
-                    $kiswahili_total_final         = $kiswahili_final + $insha_final;
+                    $kiswahili_total_final                   = $kiswahili_final + $insha_final;
 
-                    $students_marks[$i]['kiswahili_total']              = $kiswahili_total_final;
+                    $students_marks[$i]['kiswahili_total']   = number_format($kiswahili_total_final, 2);
 
-                    $marks_kiswahili_total[$i]           = number_format($kiswahili_total_final, 2);
+                    $marks_kiswahili_total[$i]               = number_format($kiswahili_total_final, 2);
 
 
                     
@@ -922,7 +922,6 @@ class ClassReportsController extends Controller
                         $cell->setAlignment('center');
                     });
 
-                    //$sheet->row($mean_count, $students_mean_marks[$d]);
                 }
 
                 //merge and center total marks title cells
