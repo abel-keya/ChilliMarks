@@ -75,7 +75,7 @@
     @endif
     <div class="padded-full">
         <a href="{{ url('teacher-assessments') }}">
-            <button class="btn fit-parent primary">Go Back</button>
+            <button class="btn fit-parent">Go Back</button>
         </a>
     </div>
 @endsection
