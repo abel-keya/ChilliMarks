@@ -130,7 +130,7 @@ class AssessmentsController extends Controller
                             break;
 
                         case 'Composition':
-                            $out_of = '50';
+                            $out_of = '40';
                             $contribution = '44.44444';
                             break;
                     }
@@ -144,7 +144,7 @@ class AssessmentsController extends Controller
                             break;
 
                         case 'Insha':
-                            $out_of = '50';
+                            $out_of = '40';
                             $contribution = '44.44444';
                             break;
                     }
