@@ -44,20 +44,20 @@ class AssessmentsController extends Controller
         $school     = School::first();
 
         //Populate select element named code
-        if($subject_code =='Maths')
+        if($subject_code =='MATHS')
         {
             $codes = ['Mathematics'];
             $selected = 1;
 
-        } elseif($subject_code =='Eng')
+        } elseif($subject_code =='ENG')
         {
             $codes = ['English', 'Composition'];
 
-        } elseif($subject_code == 'Kiswa')
+        } elseif($subject_code == 'KISWA')
         {
             $codes = ['Kiswahili', 'Insha'];
 
-        } elseif($subject_code == 'Scie')
+        } elseif($subject_code == 'SCI')
         {
             $codes = ['Science'];
             $selected = 1;
@@ -101,7 +101,7 @@ class AssessmentsController extends Controller
         {
             switch ($exam->subject->code)
             {
-                case 'Maths':
+                case 'MATHS':
 
                     switch ($assessment_name) {
                         case 'Mathematics':
@@ -110,7 +110,7 @@ class AssessmentsController extends Controller
                             break;
                     }
 
-                case 'Eng':
+                case 'ENG':
 
                     switch ($assessment_name) {
                         case 'English':
@@ -124,7 +124,7 @@ class AssessmentsController extends Controller
                             break;
                     }
 
-                case 'Kiswa':
+                case 'KISWA':
 
                     switch ($assessment_name) {
                         case 'Kiswahili':
@@ -138,7 +138,7 @@ class AssessmentsController extends Controller
                             break;
                     }
 
-                case 'scie':
+                case 'SCI':
 
                     switch ($assessment_name) {
                         case 'Science':

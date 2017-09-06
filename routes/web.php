@@ -34,10 +34,6 @@ Route::middleware(['auth'])->group(function () {
 
 	Route::post('create-exam',         ['uses' => 'Core\Exams\ExamsController@postcreate']);
 
-	Route::get('create-all-exams',     ['uses' => 'Core\Exams\ExamsController@createallexams']);
-
-	Route::post('create-all-exama',    ['uses' => 'Core\Exams\ExamsController@postcreateallexams']);
-
 	Route::get('edit-exam/{id}',       ['uses' => 'Core\Exams\ExamsController@edit']);
 
 	Route::post('update-exam/{id}',    ['uses' => 'Core\Exams\ExamsController@update']);
