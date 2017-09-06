@@ -19,39 +19,36 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('body'); ?>
-<form method="POST" action="<?php echo e(url('search-subjects')); ?>">
-	<div class="padded-full">
-		<?php echo e(csrf_field()); ?>
+<form method="POST" action="<?php echo e(url('create-subject')); ?>">
+	<?php echo e(csrf_field()); ?>
 
-		<input type="text" name="search" placeholder="Search Subjects" autocomplete="off" autofocus required/>
+	<div class="padded-full">
+	    <h5 class="pull-right">Subject Name</h5>
 	</div>
 	<div class="padded-full">
-		<button type="submit" class="btn fit-parent primary">Search</button>
+		<input type="text" name="name" value="<?php echo e(old('name')); ?>" autocomplete="off" placeholder="Enter Subject Name" autofocus>
+	</div>
+	<div class="padded-full">
+	    <h5 class="pull-right">Subject Abbreviation</h5>
+	</div>
+	<div class="padded-full">
+		<input type="text" name="abbr" value="<?php echo e(old('abbr')); ?>" autocomplete="off" placeholder="Enter Subject Abbreviation">
+	</div>
+	<div class="padded-full">
+	    <h5 class="pull-right">Subject Code</h5>
+	</div>
+	<div class="padded-full">
+		<input type="text" name="code" value="<?php echo e(old('code')); ?>" autocomplete="off" placeholder="Enter Subject Code">
+	</div>
+	<div class="padded-full">
+		<button type="submit" class="btn fit-parent primary">Create Subject</button>
 	</div>
 </form>
 <div class="padded-full">
-	<a href="<?php echo e(url('create-subject')); ?>">
-		<button class="btn fit-parent primary" style="margin-top: 10px;">Add New Subject</button>
-	</a>	
+	<a href="<?php echo e(url('subjects')); ?>">
+		<button class="btn fit-parent">Go Back</button>
+	</a>
 </div>
-<div class="padded-full">
-	<ul class="list" style="padding: 20px 0px 20px 0px;">
-		<li class="divider text-center"><p>All Subjects</p></li>
-	</ul>
-</div>
-
-<div class="padded-full">
-	<ul class="list">
-		<?php $__currentLoopData = $subjects; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $subject): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-		<li>
-			<a class="padded-list" href="<?php echo e(url('view-subject', $subject->id)); ?>">
-				<?php echo e($subject->name); ?> (<?php echo e($subject->code); ?>)
-			</a>
-		</li>
-		<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-	</ul>
-</div>
-
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('partials-script'); ?>
