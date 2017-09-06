@@ -26,7 +26,7 @@
         <ul class="list">
             <li><strong>Exam:</strong> {{ $assessment->exam->name }}, {{ $assessment->name }}, {{ $assessment->exam->period }}, {{ $assessment->exam->year }}, {{ $assessment->exam->stream->name }}</li>
             <li><strong>Exam Out of:</strong> {{ $assessment->out_of }} marks</li>
-            <li><strong>Exam Contribution:</strong> {{ $assessment->contribution }}%</li>
+            <li><strong>Subject Contribution:</strong> {{ $assessment->contribution }}%</li>
             <li><strong>Teacher:</strong> {{ $assessment->teacher->name }}</li>
             @if($assessment->status==1) 
             <li><strong>Exam Mean:</strong> {{ round($grades->avg('marks'), 2) }} Marks</li>
