@@ -24,16 +24,15 @@
 @section('body')
     <div class="padded-full">
         <ul class="list">
-            <li><strong>Exam:</strong> {{ $assessment->exam->name }}, {{ $assessment->name }}, {{ $assessment->exam->period }}, {{ $assessment->exam->year }}</li>
-            <li><strong>Class:</strong> {{ $assessment->exam->stream->name }}</li>
-            <li><strong>Out of:</strong> {{ $assessment->out_of }} marks</li>
+            <li><strong>Exam:</strong> {{ $assessment->exam->name }}, {{ $assessment->name }}, {{ $assessment->exam->period }}, {{ $assessment->exam->year }}, {{ $assessment->exam->stream->name }}</li>
+            <li><strong>Exam Out of:</strong> {{ $assessment->out_of }} marks</li>
             <li><strong>Exam Contribution:</strong> {{ $assessment->contribution }}%</li>
             <li><strong>Teacher:</strong> {{ $assessment->teacher->name }}</li>
             @if($assessment->status==1) 
             <li><strong>Exam Mean:</strong> {{ round($grades->avg('marks'), 2) }} Marks</li>
             @endif
             <li>    
-                <strong>Status:</strong>
+                <strong>Submission Status:</strong>
                 @if($assessment->status==1) 
                     <span style="color:green;"> &#10003; Submitted</span> 
                 @else   
