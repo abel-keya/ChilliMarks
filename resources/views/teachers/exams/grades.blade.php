@@ -25,12 +25,15 @@
     <div class="padded-full">
         <ul class="list">
             <li><strong>Exam Name:</strong> {{ $assessment->exam->name }}, {{ $assessment->name }}</li>
-            <li><strong>Subject:</strong> {{ $assessment->exam->subject->name }}</li>
             <li><strong>Out of:</strong> {{ $assessment->out_of }} marks</li>
-            <li><strong>Contribution:</strong> {{ $assessment->contribution }} %</li>
-            <li><strong>Subject:</strong> {{ $assessment->teacher->name }}</li>
+            <li><strong>Exam Contribution:</strong> {{ $assessment->contribution }}%</li>
+            <li><strong>Teacher:</strong> {{ $assessment->teacher->name }}</li>
             <li><strong>Class:</strong> {{ $assessment->exam->stream->name }}</li>
             <li><strong>Period:</strong> {{ $assessment->exam->period }}, {{ $assessment->exam->year }}</li>
+
+            @if($assessment->status==1) 
+            <li><strong>Exam Mean:</strong> {{ round($grades->avg('marks'), 2) }} Marks</li>
+            @endif
             <li>    
                 <strong>Status:</strong>
                 @if($assessment->status==1) 
@@ -55,7 +58,7 @@
                     <h5>{{$grade->student->name}}</h5>
                 </div>
                 <div class="padded-full">
-                    <input type="text" name="grades[]" value="{{ old('grades[]') }}" autocomplete="off" placeholder="Enter marks here..." autofocus>
+                    <input type="text" name="grades[]" value="{{ old('grades[]') }}" autocomplete="off" placeholder="Enter Marks Here..." autofocus>
                 </div>
             @endforeach
             <div class="padded-full">
@@ -67,7 +70,7 @@
             <ul class="list">
                 @foreach($grades as $key => $grade)
                     <li>
-                        <strong>{{++$key}}) {{ $grade->student->name }}:</strong> {{ $grade->marks }} marks
+                        <strong>{{++$key}}) {{ $grade->student->name }}:</strong> {{ $grade->marks }} Marks
                     </li>
                 @endforeach
             </ul>

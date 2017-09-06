@@ -22,12 +22,15 @@
     <div class="padded-full">
         <ul class="list">
             <li><strong>Exam Name:</strong> <?php echo e($assessment->exam->name); ?>, <?php echo e($assessment->name); ?></li>
-            <li><strong>Subject:</strong> <?php echo e($assessment->exam->subject->name); ?></li>
             <li><strong>Out of:</strong> <?php echo e($assessment->out_of); ?> marks</li>
-            <li><strong>Contribution:</strong> <?php echo e($assessment->contribution); ?> %</li>
-            <li><strong>Subject:</strong> <?php echo e($assessment->teacher->name); ?></li>
-            <li><strong>Class:</strong> <?php echo e($assessment->exam->stream->name); ?>, <?php echo e($assessment->exam->period); ?>, <?php echo e($assessment->exam->year); ?></li>
-            <li><strong>Average: </strong> <?php echo e($grades->mean('marks')); ?> Marks</li>
+            <li><strong>Exam Contribution:</strong> <?php echo e($assessment->contribution); ?>%</li>
+            <li><strong>Teacher:</strong> <?php echo e($assessment->teacher->name); ?></li>
+            <li><strong>Class:</strong> <?php echo e($assessment->exam->stream->name); ?></li>
+            <li><strong>Period:</strong> <?php echo e($assessment->exam->period); ?>, <?php echo e($assessment->exam->year); ?></li>
+
+            <?php if($assessment->status==1): ?> 
+            <li><strong>Exam Mean:</strong> <?php echo e(round($grades->avg('marks'), 2)); ?> Marks</li>
+            <?php endif; ?>
             <li>    
                 <strong>Status:</strong>
                 <?php if($assessment->status==1): ?> 
@@ -53,7 +56,7 @@
                     <h5><?php echo e($grade->student->name); ?></h5>
                 </div>
                 <div class="padded-full">
-                    <input type="text" name="grades[]" value="<?php echo e(old('grades[]')); ?>" autocomplete="off" placeholder="Enter marks here..." autofocus>
+                    <input type="text" name="grades[]" value="<?php echo e(old('grades[]')); ?>" autocomplete="off" placeholder="Enter Marks Here..." autofocus>
                 </div>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             <div class="padded-full">
@@ -65,7 +68,7 @@
             <ul class="list">
                 <?php $__currentLoopData = $grades; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $grade): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <li>
-                        <strong><?php echo e(++$key); ?>) <?php echo e($grade->student->name); ?>:</strong> <?php echo e($grade->marks); ?> marks
+                        <strong><?php echo e(++$key); ?>) <?php echo e($grade->student->name); ?>:</strong> <?php echo e($grade->marks); ?> Marks
                     </li>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </ul>
