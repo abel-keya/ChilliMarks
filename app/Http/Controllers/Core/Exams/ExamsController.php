@@ -11,6 +11,8 @@ use chillimarks\Models\Classes;
 use chillimarks\Models\Stream;
 use chillimarks\Models\Grade;
 use chillimarks\Models\Assessment;
+use chillimarks\Models\StreamReport;
+use chillimarks\Models\ClassesReport;
 use Auth;
 
 class ExamsController extends Controller
@@ -191,6 +193,30 @@ class ExamsController extends Controller
     {
     	$exam        = Exam::whereId($id)->first();
 
+        //detach exam from classes report
+
+        $classreports     = ClassesReport::get();
+
+        foreach($classreports as $classreport)
+        {
+            if($classreport->hasClassesExam($exam->id))
+            {
+                $classreport->removeClassesExam($exam);
+            }
+        }
+
+        //detach exam from stream report
+
+        $streamreports     = StreamReport::get();
+
+        foreach($streamreports as $streamreport)
+        {
+            if($streamreport->hasExam($exam->id))
+            {
+                $streamreport->removeExam($exam);
+            }
+        }
+
         $assessments = Assessment::whereExamId($id)->get();
 
         foreach($assessments as $assessment)
@@ -204,7 +230,7 @@ class ExamsController extends Controller
 
     	$exam->delete();
 
-    	$message = 'Exam, its associated assessment and grades deleted successfully!';
+    	$message = 'Exam, assessments, grades and reports deletion and detaching successfully done!';
 
     	return redirect('exams')->with('success', $message);
     }

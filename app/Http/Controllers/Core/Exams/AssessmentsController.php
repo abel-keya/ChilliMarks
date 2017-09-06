@@ -24,7 +24,7 @@ class AssessmentsController extends Controller
 
     public function view($id)
     {
-    	$page = 'View Assessment';
+    	$page = 'View Assessment'; 
 
     	$assessment = Assessment::whereId($id)->first();
 
@@ -203,11 +203,14 @@ class AssessmentsController extends Controller
 
     	$stream_id                    = $exam->stream->id;
 
-        $students                     = User::WhereHas(
-                                       'streams', function($q) use ($stream_id){
-                                       $q->where('stream_id', $stream_id);
-                                       }
-                                      )->get();
+        $students                     = User::whereHas(
+                                            'roles', function($q){
+                                                $q->where('name', 'student');
+                                            }
+                                        )->WhereHas(
+                                           'streams', function($q) use ($stream_id){
+                                           $q->where('stream_id', $stream_id);
+                                        })->get();
 
       	if($students->count()>0)
       	{	

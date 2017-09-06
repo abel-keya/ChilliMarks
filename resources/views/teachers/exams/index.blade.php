@@ -28,9 +28,9 @@
 					<li>
 						<a href="{{ url('view-teacher-grades', $assessment->id) }}">{{ $assessment->name }}, {{ $assessment->exam->subject->name }} {{ $assessment->exam->stream->classes->name }} 
 							@if($assessment->status==1) 
-								<span style="color:green;"> &#10003; Submitted</span> 
+								<span style="color:green;"> (Submitted)</span> 
 							@else 
-								<span style="color:blue;">&#x2715; Pending</span> 
+								<span style="color:blue;"> (Pending)</span> 
 							@endif
 						</a>
 					</li>
