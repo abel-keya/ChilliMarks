@@ -745,18 +745,21 @@ class ClassReportsController extends Controller
 
                 if(sizeof($marks_mathematics)!=0){
                     $mean_marks_mathematics            = array_sum($marks_mathematics)/sizeof($marks_mathematics);
+                    $mean_marks_mathematics            = round($mean_marks_mathematics, 2);
                 } else {
                     $mean_marks_mathematics = 0;
                 }
 
                 if(sizeof($marks_english)!=0){
                     $mean_marks_english                = array_sum($marks_english)/sizeof($marks_english);
+                    $mean_marks_english                = round($mean_marks_english, 2);
                 } else {
                     $mean_marks_english                = 0;
                 }
 
                 if(sizeof($marks_composition)!=0){
                     $mean_marks_composition            = array_sum($marks_composition)/sizeof($marks_composition);
+                    $mean_marks_composition            = round($mean_marks_composition, 2);
                 } else {
                     $mean_marks_composition                = 0;
                 }
@@ -770,12 +773,14 @@ class ClassReportsController extends Controller
 
                 if(sizeof($marks_kiswahili)!=0){
                     $mean_marks_kiswahili              = array_sum($marks_kiswahili)/sizeof($marks_kiswahili);
+                    $mean_marks_kiswahili              = round($mean_marks_kiswahili, 2);
                 } else {
                     $mean_marks_kiswahili                = 0;
                 }
 
                 if(sizeof($marks_insha)!=0){
                     $mean_marks_insha                  = array_sum($marks_insha)/sizeof($marks_insha);
+                    $mean_marks_insha                  = round($mean_marks_insha, 2);
                 } else {
                     $mean_marks_insha                = 0;
                 }
@@ -796,24 +801,28 @@ class ClassReportsController extends Controller
 
                 if(sizeof($marks_social_studies)!=0){
                     $mean_marks_social_studies         = array_sum($marks_social_studies)/sizeof($marks_social_studies);
+                    $mean_marks_social_studies         = round($mean_marks_social_studies, 2);
                 } else {
                     $mean_marks_social_studies                = 0;
                 }
 
                 if(sizeof($marks_cre)!=0){
                     $mean_marks_cre                    = array_sum($marks_cre)/sizeof($marks_cre);
+                    $mean_marks_cre                    = round($mean_marks_cre, 2);
                 } else {
                     $mean_marks_cre                = 0;
                 }
 
                 if(sizeof($marks_ire)!=0){
                     $mean_marks_ire                    = array_sum($marks_ire)/sizeof($marks_ire);
+                    $mean_marks_ire                    = round($mean_marks_ire, 2);
                 } else {
                     $mean_marks_ire                = 0;
                 }
 
                 if(sizeof($marks_hre)!=0){
                     $mean_marks_hre                    = array_sum($marks_hre)/sizeof($marks_hre);
+                    $mean_marks_hre                    = round($mean_marks_hre, 2);
                 } else {
                     $mean_marks_hre                = 0;
                 }
@@ -881,7 +890,7 @@ class ClassReportsController extends Controller
                         return $a['final_total'] < $b['final_total'];
                     });
 
-                    $sheet->row($j+8, $students_marks[$j]);
+                    $sheet->row($j+8, round($students_marks[$j], 2));
                 }
 
                 //populate position numbers
