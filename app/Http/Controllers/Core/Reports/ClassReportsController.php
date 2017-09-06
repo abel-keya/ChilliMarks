@@ -890,7 +890,9 @@ class ClassReportsController extends Controller
                         return $a['final_total'] < $b['final_total'];
                     });
 
-                    $sheet->row($j+8, round($students_marks[$j], 2));
+                    $current_student_marks = round($students_marks[$j], 2);
+                    
+                    $sheet->row($j+8, $current_student_marks);
                 }
 
                 //populate position numbers
