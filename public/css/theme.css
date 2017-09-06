@@ -222,3 +222,14 @@ input:required:focus {
     border-bottom-width: 2px !important;
     border-bottom-color: #0084e7 !important; 
 }
+
+input:required {
+    box-shadow:none !important;
+}
+input:invalid {
+    box-shadow:0 0 0px #0084e7 !important;
+}
+
+:required {
+    border-color: #0084e7 !important;
+}
