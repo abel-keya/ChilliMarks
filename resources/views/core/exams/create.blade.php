@@ -63,11 +63,14 @@
 	</div>
 	<div class="padded-full">
 		<button type="submit" class="btn fit-parent primary">Create Exam</button>
-		<a href="{{ url('exams') }}">
-			<button class="btn fit-parent" style="margin-top: 10px;">Go Back</button>
-		</a>
 	</div>
 </form>
+
+<div class="padded-full">
+	<a href="{{ url('exams') }}">
+		<button class="btn fit-parent" style="margin-top: 10px;">Go Back</button>
+	</a>
+</div>
 @endsection
 
 @section('partials-script')

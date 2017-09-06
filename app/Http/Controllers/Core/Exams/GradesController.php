@@ -76,12 +76,16 @@ class GradesController extends Controller
 
         $stream_id  = $assessment->exam->stream_id;
 
-        $students          = User::WhereHas(
+        $students          = User::whereHas(
+                                'roles', function($q){
+                                    $q->where('name', 'student');
+                                }
+                            )->WhereHas(
                             'streams', function($q) use ($stream_id){
                                 $q->where('stream_id', $stream_id);
                             })->WhereDoesntHave('grades', function ($term) use($assessment_id) {
-                                    $term->where('assessment_id','=', $assessment_id);
-                                })->get();
+                                $term->where('assessment_id','=', $assessment_id);
+                            })->get();
 
         return view('core.grades.core.create-select', compact('page', 'assessment', 'students'));
     }

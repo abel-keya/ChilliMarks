@@ -62,11 +62,14 @@
 	</div>
 	<div class="padded-full">
 		<button type="submit" class="btn fit-parent primary">Create Exam</button>
-		<a href="<?php echo e(url('exams')); ?>">
-			<button class="btn fit-parent" style="margin-top: 10px;">Go Back</button>
-		</a>
 	</div>
 </form>
+
+<div class="padded-full">
+	<a href="<?php echo e(url('exams')); ?>">
+		<button class="btn fit-parent" style="margin-top: 10px;">Go Back</button>
+	</a>
+</div>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('partials-script'); ?>
