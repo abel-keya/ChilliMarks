@@ -23,7 +23,7 @@
 	<div class="padded-full">
 		<?php echo e(csrf_field()); ?>
 
-		<input type="text" name="search" placeholder="Search Exams" autocomplete="off" autofocus/>
+		<input type="text" name="search" placeholder="Search Exams" autocomplete="off" required/>
 	</div>
 	<div class="padded-full">
 		<button type="submit" class="btn fit-parent primary">Search</button>

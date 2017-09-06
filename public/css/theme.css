@@ -212,3 +212,13 @@ input:invalid, .input-invalid {
     border-bottom-width: 2px !important;
     border-color: #0084e7 !important;
 }
+
+input:required {
+    border-bottom-width: 2px !important;
+    border-bottom-color: #0084e7 !important; 
+}
+
+input:required:focus {
+    border-bottom-width: 2px !important;
+    border-bottom-color: #0084e7 !important; 
+}
