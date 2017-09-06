@@ -27,7 +27,7 @@
 	    <h5 class="pull-right">Exam Name</h5>
 	</div>
 	<div class="padded-full">
-		<input type="text" name="name" value="{{ old('name') }}" autocomplete="off" placeholder="Enter Exam Name" autofocus>
+		<input type="text" name="name" value="{{ old('name') }}" autocomplete="off" placeholder="Exam Name i.e. End Term" autofocus>
 	</div>
 	<div class="padded-full">
 		<select name="subject_id">
