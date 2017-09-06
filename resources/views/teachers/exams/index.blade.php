@@ -26,7 +26,8 @@
 			@if(count($assessments)>0)
 				@foreach($assessments->reverse() as $assessment)
 					<li>
-						<a href="{{ url('view-teacher-grades', $assessment->id) }}">{{ $assessment->name }}, {{ $assessment->exam->subject->name }} {{ $assessment->exam->stream->name }} 
+						<a href="{{ url('view-teacher-grades', $assessment->id) }}">
+							{{ $assessment->exam->stream->name }}, {{ $assessment->name }}, {{ $assessment->exam->subject->name }} 
 							@if($assessment->status==1) 
 								<span style="color:green;"> (Submitted)</span> 
 							@else 

@@ -24,7 +24,7 @@
 @section('body')
     <div class="padded-full">
         <ul class="list">
-            <li><strong>Exam:</strong> {{ $assessment->exam->name }}, {{ $assessment->name }}, {{ $assessment->exam->period }}, {{ $assessment->exam->year }}, {{ $assessment->exam->stream->name }}</li>
+            <li><strong>Exam:</strong> {{ $assessment->exam->name }}, {{ $assessment->name }}, {{ $assessment->exam->period }}, {{ $assessment->exam->year }}, {{ $assessment->exam->stream->abbr }}</li>
             <li><strong>Exam Out of:</strong> {{ $assessment->out_of }} marks</li>
             <li><strong>Subject Contribution:</strong> {{ $assessment->contribution }}%</li>
             <li><strong>Teacher:</strong> {{ $assessment->teacher->name }}</li>
